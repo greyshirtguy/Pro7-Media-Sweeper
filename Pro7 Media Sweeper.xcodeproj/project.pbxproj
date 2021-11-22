@@ -15,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		372DEDD1274BDCD500F8A4F8 /* ScreenShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScreenShot.png; sourceTree = "<group>"; };
 		3784582C274BA52E00BE4635 /* Pro7 Media Sweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pro7 Media Sweeper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3784582F274BA52E00BE4635 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		37845830274BA52E00BE4635 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -42,6 +43,7 @@
 			isa = PBXGroup;
 			children = (
 				37845843274BA8C900BE4635 /* Readme.md */,
+				372DEDD1274BDCD500F8A4F8 /* ScreenShot.png */,
 				3784582E274BA52E00BE4635 /* Pro7 Media Sweeper */,
 				3784582D274BA52E00BE4635 /* Products */,
 			);
