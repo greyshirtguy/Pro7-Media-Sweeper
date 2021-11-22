@@ -8,6 +8,9 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ViewController : NSViewController
+@property (weak) IBOutlet NSTextField *mediaFolderTextField;
+@property (weak) IBOutlet NSTextField *supportFilesTextField;
+@property (weak) IBOutlet NSButton *includeSubfoldersButton;
 
 
 @end
