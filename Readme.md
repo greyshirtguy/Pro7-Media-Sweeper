@@ -4,7 +4,7 @@
 
 My plan is to make a crude, but effective, native MacOS app with Appkit/Storyboards/Objective-C.  
 
-*Perhaps if this MacOS port was done with a scripting language it might be easier for others to understand and contribute to - but I wanted to get this done in as little spare time as possible so I used was most comfortable for me.  Feel free to re-write in AppleScript, JavaSript, Python etc.*
+*Perhaps if this MacOS port was done with a scripting language it might be easier for others to understand and contribute to - but I wanted to get this done in as little spare time as possible so I used old ways that were most comfortable for me.  Feel free to re-write in AppleScript, JavaSript, Python etc.*
 
 
 ### TODO:
