@@ -10,10 +10,10 @@ My plan is to make a crude, but effective, native MacOS app with Appkit/Storyboa
 ### TODO:
 1. ~~Create this repository with an empty X-Code project.~~
 2. ~~Create this Readme.~~
-3. Basic project settings, remove un-needed menus and start laying out and wiring up some controls.
+3. ~~Basic project settings, remove un-needed menus and start laying out and wiring up some controls.~~
 4. Do we need to check if Pro7 is running? (Is it always okay to open and read all the docs and playlists while Pro7 is running?)
-5. Determine current media, library and playlist folders from Pro7 preferences.
-6. Show current media folder and make hand-editable and add browse/select UI.
+5. ~~Determine current media, library and playlist folders from Pro7 preferences.~~
+6. ~~Show current media folder and make hand-editable and add browse/select UI.~~
 7. Test reading binary propresenter files as NSStrings to allow use of REGEX - (This is a typically a no-no and source of error - be careful)
 8. Determine all required REGEX patterns to quickly discover media file references in Mac created Presentation files
 9. Determine all required REGEX patterns to quickly discover media file references in Win created Presentation files
