@@ -17,7 +17,7 @@ My plan is to make a crude, but effective, native MacOS app with Appkit/Storyboa
 6. ~~Show current media folder and make hand-editable and add browse/select UI.~~
 7. Test reading binary propresenter files as NSStrings to allow use of REGEX - (This is a typically a no-no and source of error - be careful)
 8. Determine all required REGEX patterns to quickly discover media file references in Mac created Presentation files
-9. Determine all required REGEX patterns to quickly discover media file references in Win created Presentation files
+9. Determine all required REGEX patterns to quickly discover media file references in Win created Presentation files (Arlin has already done this!)
 10. Enumerate through all propresenter files in library and add to list of referenced media files.
 11. Add scanning progress UI?
 12. Compare above list to Windows version (to sense check chosen REGEX patterns are working as well as Arlins)
