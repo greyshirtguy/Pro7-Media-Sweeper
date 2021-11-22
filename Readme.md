@@ -2,6 +2,7 @@
 ### A *work-in-progess* MacOS port of [Pro7-Media-Sweeper](https://github.com/arlinsandbulte/Pro7-Media-Sweeper) by Arlin Sandbulte.
 ![Screenshot](ScreenShot.png)
 
+This app is still in early development stage and not yet functional.  
 My plan is to make a crude, but effective, native MacOS app with Appkit/Storyboards/Objective-C.  
 
 *Perhaps if this MacOS port was done with a scripting language it might be easier for others to understand and contribute to - but I wanted to get this done in as little spare time as possible so I used old ways that were most comfortable for me.  Feel free to re-write in AppleScript, JavaSript, Python etc.*
