@@ -41,13 +41,12 @@
 }
 
 - (IBAction)sweepButtonClicked:(NSButton *)sender {
-    // TODO: Should we check if Pro7 is running - is there any chance of negative impact of opening/reading all library documents etc while Pro7 is open?
+    // Don't judge me too harshly for putting all the logic in this viewcontroller instead of a nice MVC. This is a pretty small "rough-and-ready" app!
     
-    // TODO: check if user has entered ~/ prefix manually and resolve if so...
+    // TODO: Should we check if Pro7 is running - is there any chance of negative impact of opening/reading all library documents etc while Pro7 is open?
     
     // Create NSURL to point at Pro7 library folder (converting any invalid chars like & to std percent encoding used by URLs - just in case library folder contains such chars)
     NSURL *libraryFolderURL = [NSURL URLWithString:[[self.supportFilesTextField stringValue] stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
-    
     
     // NSMutableArray to store all found media file references
     NSMutableArray<NSURL *> *mutableFileURLs = [NSMutableArray array];
@@ -75,9 +74,14 @@
         }
     }
     
+    // TODO: remove this debug code
     NSLog(@"%lu", (unsigned long)[mutableFileURLs count]);
     
     
+    //TODO:
+    // ********************
+    // Enumerate the entire contents of playlists folder  and then read each playlist file to record all found references to media files (using simple REGEX matching)
+    // ********************
     
     
     // ********************
@@ -88,6 +92,13 @@
     if (self.includeSubfoldersButton.state == NSControlStateValueOff)
         enumOptions = enumOptions | NSDirectoryEnumerationSkipsSubdirectoryDescendants;
     
+    // TODO: check if user has entered ~/ prefix manually and resolve if so...
+    
+    // TODO: Enumerate the entire contents of selected Media folder (and sub folders if user chose) - moving each file out (to swept files folder) if not referenced
+    
+    // TODO: Completion message/UI update (show any errors)
+    
+    // TODO: Auto open swept files folder in Finder (maybe have button to manually open)??
     
 }
 
