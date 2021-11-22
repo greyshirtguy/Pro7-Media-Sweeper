@@ -1,5 +1,6 @@
 # Pro7 Media Sweeper
 ### A *work-in-progess* MacOS port of [Pro7-Media-Sweeper](https://github.com/arlinsandbulte/Pro7-Media-Sweeper) by Arlin Sandbulte.
+![Screenshot](ScreenShot.png)
 
 My plan is to make a crude, but effective, native MacOS app with Appkit/Storyboards/Objective-C.  
 
