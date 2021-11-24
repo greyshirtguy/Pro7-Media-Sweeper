@@ -11,7 +11,8 @@
 @property (weak) IBOutlet NSTextField *mediaFolderTextField;
 @property (weak) IBOutlet NSTextField *supportFilesTextField;
 @property (weak) IBOutlet NSButton *includeSubfoldersButton;
-
+@property (weak) IBOutlet NSButton *sweepButton;
+@property (weak) IBOutlet NSProgressIndicator *progressIndicator;
 
 @end
 

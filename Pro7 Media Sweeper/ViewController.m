@@ -43,6 +43,10 @@
 - (IBAction)sweepButtonClicked:(NSButton *)sender {
     // Don't judge me too harshly for putting all the logic in this viewcontroller instead of a nice MVC. This is a pretty small "rough-and-ready" app!
     
+    // Disable Sweep button & show progress indicator
+    [self.sweepButton setEnabled:false];
+    [self.progressIndicator startAnimation:nil];
+    
     // TODO: Should we check if Pro7 is running - is there any chance of negative impact of opening/reading all library documents etc while Pro7 is open?
     
     // Create NSURL to point at Pro7 library folder (converting any invalid chars like & to std percent encoding used by URLs - just in case library folder contains such chars)
@@ -67,7 +71,23 @@
             NSData *proFileData = [NSData dataWithContentsOfFile:[fileURL path]];
             NSString *proFileString = [[NSString alloc] initWithBytes:(char *)proFileData.bytes length:proFileData.length encoding:NSISOLatin1StringEncoding];
             
+            NSLog(@"Name: %@\n  Data Length:%lu\nString Length:%lu",[fileURL lastPathComponent],(unsigned long)[proFileData length],(unsigned long)[proFileString length]);
+            
+            // For debugging purposes - Log any mismatch of reading file as NSData vs NSString
+            if ([proFileData length] != [proFileData length]) {
+                NSLog(@"File data/string size mismatch");
+            }
+            
             //[proFileString containsString:[NSString stringWithFormat:@"%c%c", 0x1a,0x06]]
+            NSString *pattern = [NSString stringWithFormat:@"%c%c", 0x1a,0x06];
+
+            NSError *error = nil;
+            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&error];
+
+            NSUInteger numberOfMatches = [regex numberOfMatchesInString:proFileString
+                                                                options:0
+                                                                  range:NSMakeRange(0, [proFileString length])];
+            NSLog(@"Found %lu media items", (unsigned long)numberOfMatches);
             
             // Add to list of found .pro files
             [mutableFileURLs addObject:fileURL];
@@ -99,6 +119,10 @@
     // TODO: Completion message/UI update (show any errors)
     
     // TODO: Auto open swept files folder in Finder (maybe have button to manually open)??
+    
+    // Enable Sweep button & hide progress indicator
+    [self.sweepButton setEnabled:true];
+    [self.progressIndicator stopAnimation:nil];
     
 }
 

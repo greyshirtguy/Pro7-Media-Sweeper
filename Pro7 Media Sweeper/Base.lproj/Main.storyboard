@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -349,11 +350,11 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="658" height="177"/>
+                        <rect key="frame" x="0.0" y="0.0" width="658" height="172"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PHt-lz-f7P">
-                                <rect key="frame" x="20" y="112" width="570" height="21"/>
+                                <rect key="frame" x="20" y="107" width="570" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="ADN-Ju-Hd4">
                                     <font key="font" metaFont="systemLight" size="13"/>
@@ -362,7 +363,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ApY-1P-Doo">
-                                <rect key="frame" x="18" y="141" width="158" height="16"/>
+                                <rect key="frame" x="18" y="136" width="158" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Media Folder To Sweep:" id="5WO-07-xCa">
                                     <font key="font" metaFont="system"/>
@@ -371,7 +372,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PmA-h7-Yt1">
-                                <rect key="frame" x="18" y="42" width="102" height="16"/>
+                                <rect key="frame" x="18" y="37" width="102" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Support Files:" id="Mrf-bG-jUO">
                                     <font key="font" metaFont="systemLight" size="13"/>
@@ -380,7 +381,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hyi-YE-dGk">
-                                <rect key="frame" x="477" y="80" width="158" height="18"/>
+                                <rect key="frame" x="477" y="75" width="158" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Include All Subfolders" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="fXM-mM-Pfk">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -388,7 +389,7 @@
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hOq-Jr-gOV">
-                                <rect key="frame" x="402" y="13" width="243" height="32"/>
+                                <rect key="frame" x="402" y="8" width="243" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Sweep Unreferenced Media Files" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" id="s3J-Zw-6XI">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -400,7 +401,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vVy-4F-2he">
-                                <rect key="frame" x="18" y="20" width="377" height="16"/>
+                                <rect key="frame" x="18" y="15" width="385" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Unable to read Pro7 preferences" id="jv3-Xf-cD9">
                                     <font key="font" metaFont="systemUltraLight" size="13"/>
@@ -409,7 +410,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N1A-ag-4Bx">
-                                <rect key="frame" x="596" y="105" width="48" height="32"/>
+                                <rect key="frame" x="596" y="100" width="48" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" bezelStyle="rounded" image="magnifyingglass" catalog="system" imagePosition="overlaps" alignment="right" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LUn-kp-HI7">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -419,17 +420,23 @@
                                     <action selector="mediaFolderBrowseButtonClicked:" target="XfG-lQ-9wD" id="kCI-RO-3CP"/>
                                 </connections>
                             </button>
+                            <progressIndicator fixedFrame="YES" maxValue="100" doubleValue="50" displayedWhenStopped="NO" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="drV-7U-bah">
+                                <rect key="frame" x="409" y="-9" width="229" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </progressIndicator>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="includeSubfoldersButton" destination="hyi-YE-dGk" id="LQf-0O-doJ"/>
                         <outlet property="mediaFolderTextField" destination="PHt-lz-f7P" id="mjk-C8-K89"/>
+                        <outlet property="progressIndicator" destination="drV-7U-bah" id="cuO-pi-v4F"/>
                         <outlet property="supportFilesTextField" destination="vVy-4F-2he" id="IT8-YW-rUd"/>
+                        <outlet property="sweepButton" destination="hOq-Jr-gOV" id="4eA-Gs-oLa"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="64" y="643.5"/>
+            <point key="canvasLocation" x="64" y="641"/>
         </scene>
     </scenes>
     <resources>
