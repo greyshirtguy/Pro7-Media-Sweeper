@@ -41,26 +41,57 @@
 }
 
 - (IBAction)sweepButtonClicked:(NSButton *)sender {
-    // Don't judge me too harshly for putting all the logic in this viewcontroller instead of a nice MVC. This is a pretty small "rough-and-ready" app!
-    
-    // Disable Sweep button & show progress indicator
-    [self.sweepButton setEnabled:false];
-    [self.progressIndicator startAnimation:nil];
-    
     // TODO: Should we check if Pro7 is running - is there any chance of negative impact of opening/reading all library documents etc while Pro7 is open?
     
-    // Create NSURL to point at Pro7 library folder (converting any invalid chars like & to std percent encoding used by URLs - just in case library folder contains such chars)
-    NSURL *libraryFolderURL = [NSURL URLWithString:[[self.supportFilesTextField stringValue] stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
+    // Create NSURL to point at Pro7 Support Folder (converting any invalid chars like & to std percent encoding used by URLs - just in case library folder contains such chars)
+    NSURL *pro7SupportFolderURL = [NSURL URLWithString:[[self.supportFilesTextField stringValue] stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
+    
+    // Create NSURL to point to selected Media Folder (converting any invalid chars like & to std percent encoding used by URLs - just in case library folder contains such chars)
+    NSURL *mediaFolderToScan = [NSURL URLWithString:[[self.mediaFolderTextField stringValue] stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
+    
+    // Create BOOL to represent inclusion of sub-folders in the scan.
+    BOOL includeSubFolders = (self.includeSubfoldersButton.state == NSControlStateValueOn);
+    
+    // Update UI to show scanning has started
+    [self.progressIndicator startAnimation:nil];
+    
+    // Disable scan button until this scan is completed
+    [self.sweepButton setEnabled:false];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        // Call function to scan folders in background
+        [self scanMediaFolder:mediaFolderToScan includingSubFolders:includeSubFolders forMediaNotUsedByPro7SupportFiles:pro7SupportFolderURL];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Update UI to show scanning has completed
+            [self.progressIndicator stopAnimation:nil];
+            
+            // Reenable scann button
+            [self.sweepButton setEnabled:true];
+        });
+    });
+}
+
+
+- (void)scanMediaFolder:(NSURL *)mediaFolderToScanURL includingSubFolders:(BOOL)includeSubFolders forMediaNotUsedByPro7SupportFiles:(NSURL *)pro7SupportFolderURL {
+    // ***************************************************************************************************************************************
+    // ********** This function is called on a background thread - use dispatch_async(dispatch_get_main_queue() to Update UI *****************
+    // ***************************************************************************************************************************************
     
     // NSMutableArray to store all found media file references
-    NSMutableArray<NSURL *> *mutableFileURLs = [NSMutableArray array];
+    NSMutableArray<NSURL *> *mediaFileURLs = [NSMutableArray array];
+    
+    NSLog(@"%@",pro7SupportFolderURL);
     
     // ********************
-    // Enumerate the entire contents of library folder (and sub folders) and then read each .pro file to record all found references to media files (using simple REGEX matching)
+    // Enumerate the entire contents of Libraries folder (and sub folders) and then read each .pro file to record all found references to media files (using simple REGEX matching)
     // ********************
     NSFileManager *localFileManager= [[NSFileManager alloc] init];
+    
+    NSURL *librariesFolderURL = [pro7SupportFolderURL URLByAppendingPathComponent:@"Libraries"];
+    
     NSDirectoryEnumerator *directoryEnumerator =
-       [localFileManager enumeratorAtURL:libraryFolderURL
+       [localFileManager enumeratorAtURL:librariesFolderURL
               includingPropertiesForKeys:@[NSURLNameKey]
                                  options:0
                             errorHandler:nil];
@@ -68,34 +99,70 @@
     for (NSURL *fileURL in directoryEnumerator) {
         if ([[[fileURL pathExtension] lowercaseString]  isEqual: @"pro"] ) {
             
+            // Read file as plain data
             NSData *proFileData = [NSData dataWithContentsOfFile:[fileURL path]];
-            NSString *proFileString = [[NSString alloc] initWithBytes:(char *)proFileData.bytes length:proFileData.length encoding:NSISOLatin1StringEncoding];
+            
+            // Create NSString from the data - This allows the unconventional use of REGEX to find patterns in the string form of the data. (Making sure to force a specific string encoding to an 8 bit encoding).
+            //NSString *proFileString = [[NSString alloc] initWithBytes:(char *)proFileData.bytes length:proFileData.length encoding:NSISOLatin1StringEncoding];
+            NSString *proFileString = [[NSString alloc] initWithData:proFileData encoding:NSISOLatin1StringEncoding];
             
             NSLog(@"Name: %@\n  Data Length:%lu\nString Length:%lu",[fileURL lastPathComponent],(unsigned long)[proFileData length],(unsigned long)[proFileString length]);
             
             // For debugging purposes - Log any mismatch of reading file as NSData vs NSString
-            if ([proFileData length] != [proFileData length]) {
-                NSLog(@"File data/string size mismatch");
+            if ([proFileData length] != [proFileString length]) {
+                NSLog(@"Warning: File data/string size mismatch");
             }
             
             //[proFileString containsString:[NSString stringWithFormat:@"%c%c", 0x1a,0x06]]
-            NSString *pattern = [NSString stringWithFormat:@"%c%c", 0x1a,0x06];
-
+            
+            // Patterns to find paths to media files
+            NSString *pattern = [NSString stringWithFormat:@"file:///.*(?=%c%c)", 0x18,0x01]; // Absolute path starts with "file:///" and ends with \^X \^A (0x18 0x01).  It's also URL encoded (%20 for space etc)
+            // Relative path ends with \^Z \^F = 0x1a 0x06  //TODO: determine starting chars/bytes
+            
+            // Setup REGEX
             NSError *error = nil;
             NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&error];
-
+            
+            // Count matches
             NSUInteger numberOfMatches = [regex numberOfMatchesInString:proFileString
                                                                 options:0
                                                                   range:NSMakeRange(0, [proFileString length])];
             NSLog(@"Found %lu media items", (unsigned long)numberOfMatches);
             
-            // Add to list of found .pro files
-            [mutableFileURLs addObject:fileURL];
+            // Grab all REGEX matches in an array
+            NSArray *matches = [regex matchesInString:proFileString
+                                              options:0
+                                                range:NSMakeRange(0, [proFileString length])];
+
+            // For each match, create a URL object and add to list of
+            for (NSTextCheckingResult *match in matches) {
+                NSString *absolutePathToMediaFile = [proFileString substringWithRange:[match range]];
+                //NSLog(@"%@", absolutePathToMediaFile);
+                
+                // Add to list of media files(as a URL)
+                NSURL *mediaFileURL = [NSURL URLWithString:absolutePathToMediaFile];
+                if (mediaFileURL) {
+                    [mediaFileURLs addObject:mediaFileURL];
+                } else {
+                    NSLog(@"Error converting %@ to URL", absolutePathToMediaFile);
+                }
+            }
+            
+            
         }
     }
     
+    NSLog(@"%@", mediaFileURLs);
+    
     // TODO: remove this debug code
-    NSLog(@"%lu", (unsigned long)[mutableFileURLs count]);
+    NSLog(@"%lu media files found.", (unsigned long)[mediaFileURLs count]);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Library Scan Complete."];
+        [alert setInformativeText:[NSString stringWithFormat:@"Found %lu references to media files.", (unsigned long)[mediaFileURLs count]]];
+        [alert addButtonWithTitle:@"OK"];
+        [alert beginSheetModalForWindow:self.view.window completionHandler:nil];
+    });
     
     
     //TODO:
@@ -109,7 +176,7 @@
     // ********************
     // Check if user has selected to include all subfolders and setup NSDirectoryEnumerationOptions to suit selection.
     NSDirectoryEnumerationOptions enumOptions = NSDirectoryEnumerationSkipsHiddenFiles;
-    if (self.includeSubfoldersButton.state == NSControlStateValueOff)
+    if (!includeSubFolders)
         enumOptions = enumOptions | NSDirectoryEnumerationSkipsSubdirectoryDescendants;
     
     // TODO: check if user has entered ~/ prefix manually and resolve if so...
@@ -119,11 +186,6 @@
     // TODO: Completion message/UI update (show any errors)
     
     // TODO: Auto open swept files folder in Finder (maybe have button to manually open)??
-    
-    // Enable Sweep button & hide progress indicator
-    [self.sweepButton setEnabled:true];
-    [self.progressIndicator stopAnimation:nil];
-    
 }
 
 - (void)setRepresentedObject:(id)representedObject {
