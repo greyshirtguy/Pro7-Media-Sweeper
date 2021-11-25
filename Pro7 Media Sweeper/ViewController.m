@@ -58,6 +58,8 @@
     // Disable scan button until this scan is completed
     [self.sweepButton setEnabled:false];
     
+    // Call the sweep function on a background thread (to allow UI to animate/update during the sweep)
+    // NB: This means that the sweep function must use dispatch_async(dispatch_get_main_queue() to Update UI (Sorry - destroying the MVC design pattern here - I know!)
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         // Call function to scan folders in background
         [self scanMediaFolder:mediaFolderToScan includingSubFolders:includeSubFolders forMediaNotUsedByPro7SupportFiles:pro7SupportFolderURL];
@@ -66,7 +68,7 @@
             // Update UI to show scanning has completed
             [self.progressIndicator stopAnimation:nil];
             
-            // Reenable scann button
+            // Re-enable scann button
             [self.sweepButton setEnabled:true];
         });
     });
@@ -79,90 +81,30 @@
     // ***************************************************************************************************************************************
     
     // NSMutableArray to store all found media file references
-    NSMutableArray<NSURL *> *mediaFileURLs = [NSMutableArray array];
+    NSMutableArray<NSString *> *referencedMediaFiles = [NSMutableArray array];
     
-    NSLog(@"%@",pro7SupportFolderURL);
+    // Patterns to find paths referencing media files - These patterns work when representing the file data as NSStrings with any english encoding that uses ONE byte chars (This program will use NSISOLatin1StringEncoding)
+    // TODO: Update to work with unicode filenames in any language.
+    // Absolute path starts with "file:///", then has any number of any chars followed by a . and then any number of alpha-numeric chars and is ended by two non-ascii chars (bytes 0x18 0x01).  (NB for later, it's also URL encoded with % escapes)
+    NSString *patternAbsoluteMediaPath = [NSString stringWithFormat:@"file:///.*\\.([0-9]|[a-z]|[A-Z])*(?=%c%c)", 0x18,0x01];
+    // Relative path starts with a non-ascii char (byte 0x12), then has any number of any chars followed by a . and then any number of alpha-numeric chars and is ended by two non-ascii chars (bytes 0x1a 0x06)
+    NSString *patternRelativeMediaPath = [NSString stringWithFormat:@"(?<=%c.).*\\.([0-9]|[a-z]|[A-Z])*(?=%c%c)", 0x12,0x1A,0x06];
     
-    // ********************
-    // Enumerate the entire contents of Libraries folder (and sub folders) and then read each .pro file to record all found references to media files (using simple REGEX matching)
-    // ********************
-    NSFileManager *localFileManager= [[NSFileManager alloc] init];
-    
+    // Enumerate the entire contents of Libraries folder (and sub folders) and then read each .pro file and add all found references to referencedMediaFiles array (using simple REGEX matching)
     NSURL *librariesFolderURL = [pro7SupportFolderURL URLByAppendingPathComponent:@"Libraries"];
-    
-    NSDirectoryEnumerator *directoryEnumerator =
-       [localFileManager enumeratorAtURL:librariesFolderURL
-              includingPropertiesForKeys:@[NSURLNameKey]
-                                 options:0
-                            errorHandler:nil];
-    
-    for (NSURL *fileURL in directoryEnumerator) {
-        if ([[[fileURL pathExtension] lowercaseString]  isEqual: @"pro"] ) {
-            
-            // Read file as plain data
-            NSData *proFileData = [NSData dataWithContentsOfFile:[fileURL path]];
-            
-            // Create NSString from the data - This allows the unconventional use of REGEX to find patterns in the string form of the data. (Making sure to force a specific string encoding to an 8 bit encoding).
-            //NSString *proFileString = [[NSString alloc] initWithBytes:(char *)proFileData.bytes length:proFileData.length encoding:NSISOLatin1StringEncoding];
-            NSString *proFileString = [[NSString alloc] initWithData:proFileData encoding:NSISOLatin1StringEncoding];
-            
-            NSLog(@"Name: %@\n  Data Length:%lu\nString Length:%lu",[fileURL lastPathComponent],(unsigned long)[proFileData length],(unsigned long)[proFileString length]);
-            
-            // For debugging purposes - Log any mismatch of reading file as NSData vs NSString
-            if ([proFileData length] != [proFileString length]) {
-                NSLog(@"Warning: File data/string size mismatch");
-            }
-            
-            //[proFileString containsString:[NSString stringWithFormat:@"%c%c", 0x1a,0x06]]
-            
-            // Patterns to find paths to media files
-            NSString *pattern = [NSString stringWithFormat:@"file:///.*(?=%c%c)", 0x18,0x01]; // Absolute path starts with "file:///" and ends with \^X \^A (0x18 0x01).  It's also URL encoded (%20 for space etc)
-            // Relative path ends with \^Z \^F = 0x1a 0x06  //TODO: determine starting chars/bytes
-            
-            // Setup REGEX
-            NSError *error = nil;
-            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&error];
-            
-            // Count matches
-            NSUInteger numberOfMatches = [regex numberOfMatchesInString:proFileString
-                                                                options:0
-                                                                  range:NSMakeRange(0, [proFileString length])];
-            NSLog(@"Found %lu media items", (unsigned long)numberOfMatches);
-            
-            // Grab all REGEX matches in an array
-            NSArray *matches = [regex matchesInString:proFileString
-                                              options:0
-                                                range:NSMakeRange(0, [proFileString length])];
+    [self recursivelyScanFilesWithExtension:@"pro" inFolder:librariesFolderURL forReferencesToMediaFilesWithRegexPattern:patternAbsoluteMediaPath addingFoundReferencesToArray:referencedMediaFiles];
+    [self recursivelyScanFilesWithExtension:@"pro" inFolder:librariesFolderURL forReferencesToMediaFilesWithRegexPattern:patternRelativeMediaPath addingFoundReferencesToArray:referencedMediaFiles];
 
-            // For each match, create a URL object and add to list of
-            for (NSTextCheckingResult *match in matches) {
-                NSString *absolutePathToMediaFile = [proFileString substringWithRange:[match range]];
-                //NSLog(@"%@", absolutePathToMediaFile);
-                
-                // Add to list of media files(as a URL)
-                NSURL *mediaFileURL = [NSURL URLWithString:absolutePathToMediaFile];
-                if (mediaFileURL) {
-                    [mediaFileURLs addObject:mediaFileURL];
-                } else {
-                    NSLog(@"Error converting %@ to URL", absolutePathToMediaFile);
-                }
-            }
-            
-            
-        }
+    // Enumerate the entire contents of Playlist folder (and sub folders) and then read each file and add all found references to referencedMediaFiles array (using simple REGEX matching)
+    NSURL *playlistFolderURL = [pro7SupportFolderURL URLByAppendingPathComponent:@"PlayLists"];
+    [self recursivelyScanFilesWithExtension:nil inFolder:playlistFolderURL forReferencesToMediaFilesWithRegexPattern:patternAbsoluteMediaPath addingFoundReferencesToArray:referencedMediaFiles];
+    [self recursivelyScanFilesWithExtension:nil inFolder:playlistFolderURL forReferencesToMediaFilesWithRegexPattern:patternRelativeMediaPath addingFoundReferencesToArray:referencedMediaFiles];
+    
+    NSLog(@"%lu media files found.", (unsigned long)[referencedMediaFiles count]);
+    
+    for (NSString *filePath in referencedMediaFiles) {
+        NSLog(@"%@", filePath);
     }
-    
-    NSLog(@"%@", mediaFileURLs);
-    
-    // TODO: remove this debug code
-    NSLog(@"%lu media files found.", (unsigned long)[mediaFileURLs count]);
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert setMessageText:@"Library Scan Complete."];
-        [alert setInformativeText:[NSString stringWithFormat:@"Found %lu references to media files.", (unsigned long)[mediaFileURLs count]]];
-        [alert addButtonWithTitle:@"OK"];
-        [alert beginSheetModalForWindow:self.view.window completionHandler:nil];
-    });
     
     
     //TODO:
@@ -186,6 +128,76 @@
     // TODO: Completion message/UI update (show any errors)
     
     // TODO: Auto open swept files folder in Finder (maybe have button to manually open)??
+}
+
+- (void)recursivelyScanFilesWithExtension:(NSString *)fileExtension inFolder:(NSURL *)folderToScan forReferencesToMediaFilesWithRegexPattern:(NSString *)regexPatternForMediaFileReference addingFoundReferencesToArray: (NSMutableArray *)referencedMediaFiles {
+    // ***************************************************************************************************************************************
+    // ********** This function is called on a background thread - use dispatch_async(dispatch_get_main_queue() to Update UI *****************
+    // ***************************************************************************************************************************************
+    
+    // Setup REGEX
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexPatternForMediaFileReference options:0 error:nil];
+    
+
+    NSLog(@"Regex: %@", regex);
+
+    
+    NSFileManager *localFileManager= [[NSFileManager alloc] init];
+    NSDirectoryEnumerator *directoryEnumerator =
+       [localFileManager enumeratorAtURL:folderToScan
+              includingPropertiesForKeys:@[NSURLNameKey]
+                                 options:0
+                            errorHandler:nil];
+    
+    for (NSURL *fileURL in directoryEnumerator) {
+        if (fileExtension == nil || [[[fileURL pathExtension] lowercaseString]  isEqual: fileExtension] ) {
+            
+            // Read file as plain data
+            NSData *proFileData = [NSData dataWithContentsOfFile:[fileURL path]];
+            
+            // Create NSString from the data - This allows the unconventional use of REGEX to find patterns in the string form of the data. (Making sure to force a specific string encoding to an 8 bit encoding).
+            //NSString *proFileString = [[NSString alloc] initWithBytes:(char *)proFileData.bytes length:proFileData.length encoding:NSISOLatin1StringEncoding];
+            NSString *proFileString = [[NSString alloc] initWithData:proFileData encoding:NSISOLatin1StringEncoding];
+            
+            //NSLog(@"Name: %@\n  Data Length:%lu\nString Length:%lu",[fileURL lastPathComponent],(unsigned long)[proFileData length],(unsigned long)[proFileString length]);
+            
+            // For debugging purposes - Log any mismatch of reading file as NSData vs NSString
+            if ([proFileData length] != [proFileString length]) {
+                NSLog(@"Warning: File data/string size mismatch");
+            }
+            
+            // Grab all REGEX matches in an array
+            NSArray *matches = [regex matchesInString:proFileString
+                                              options:0
+                                                range:NSMakeRange(0, [proFileString length])];
+
+            // For each match, create a URL object and add to list
+            for (NSTextCheckingResult *match in matches) {
+                NSString *absolutePathToMediaFile = [proFileString substringWithRange:[match range]];
+                //NSLog(@"%@", absolutePathToMediaFile);
+                
+                // Add to list of media files
+                if (absolutePathToMediaFile) {
+                    [referencedMediaFiles addObject:absolutePathToMediaFile];
+                } else {
+                    NSLog(@"Error extracting absolutePathToMediaFile");
+                }
+            }
+            
+            
+        }
+    }
+    NSLog(@"%lu media files found.", (unsigned long)[referencedMediaFiles count]);
+    
+    /*
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:[NSString stringWithFormat:@"%@ Scan Complete.", [folderToScan lastPathComponent]]];
+        [alert setInformativeText:[NSString stringWithFormat:@"So far, found %lu references to media files.\nSee console output for list.", (unsigned long)[referencedMediaFiles count]]];
+        [alert addButtonWithTitle:@"OK"];
+        //[alert beginSheetModalForWindow:self.view.window completionHandler:nil];
+    });
+    */
 }
 
 - (void)setRepresentedObject:(id)representedObject {
