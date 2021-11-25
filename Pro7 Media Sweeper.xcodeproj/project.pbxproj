@@ -26,6 +26,7 @@
 		3784583A274BA52E00BE4635 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3784583C274BA52E00BE4635 /* Pro7_Media_Sweeper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pro7_Media_Sweeper.entitlements; sourceTree = "<group>"; };
 		37845843274BA8C900BE4635 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		37A7A82B274FC7EB008CAB53 /* Sweeper Icon.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Sweeper Icon.svg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +45,7 @@
 			children = (
 				37845843274BA8C900BE4635 /* Readme.md */,
 				372DEDD1274BDCD500F8A4F8 /* ScreenShot.png */,
+				37A7A82B274FC7EB008CAB53 /* Sweeper Icon.svg */,
 				3784582E274BA52E00BE4635 /* Pro7 Media Sweeper */,
 				3784582D274BA52E00BE4635 /* Products */,
 			);
