@@ -157,13 +157,11 @@ NSURL *sweeperResultsFile;
     
     // Enumerate the entire contents of Libraries folder (and sub folders) and then read each .pro file and add all found references to referencedMediaFiles array (using simple REGEX matching)
     NSURL *librariesFolderURL = [pro7SupportFolderURL URLByAppendingPathComponent:@"Libraries"];
-    [self recursivelyScanFilesWithExtension:@"pro" inFolder:librariesFolderURL forReferencesToMediaFilesWithRegexPattern:patternAbsoluteMediaPath addingFoundReferencesToArray:referencedMediaFiles]; // AbsolutePaths
-    [self recursivelyScanFilesWithExtension:@"pro" inFolder:librariesFolderURL forReferencesToMediaFilesWithRegexPattern:patternRelativeMediaPath addingFoundReferencesToArray:referencedMediaFiles]; // RelativePaths
-
+    [self recursivelyScanFilesWithExtension:@"pro" inFolder:librariesFolderURL forReferencesToMediaFilesWithRegexPatterns:@[patternAbsoluteMediaPath,patternRelativeMediaPath] addingFoundReferencesToArray:referencedMediaFiles];
+    
     // Enumerate the entire contents of Playlist folder (and sub folders) and then read each file and add all found references to referencedMediaFiles array (using simple REGEX matching)
     NSURL *playlistFolderURL = [pro7SupportFolderURL URLByAppendingPathComponent:@"PlayLists"];
-    [self recursivelyScanFilesWithExtension:nil inFolder:playlistFolderURL forReferencesToMediaFilesWithRegexPattern:patternAbsoluteMediaPath addingFoundReferencesToArray:referencedMediaFiles]; // AbsolutePaths
-    [self recursivelyScanFilesWithExtension:nil inFolder:playlistFolderURL forReferencesToMediaFilesWithRegexPattern:patternRelativeMediaPath addingFoundReferencesToArray:referencedMediaFiles]; // RelativePaths
+    [self recursivelyScanFilesWithExtension:nil inFolder:playlistFolderURL forReferencesToMediaFilesWithRegexPatterns:@[patternAbsoluteMediaPath,patternRelativeMediaPath] addingFoundReferencesToArray:referencedMediaFiles];
     
     NSLog(@"%lu media files found.", (unsigned long)[referencedMediaFiles count]);
     
@@ -188,17 +186,13 @@ NSURL *sweeperResultsFile;
 
 }
 
-- (void)recursivelyScanFilesWithExtension:(NSString *)fileExtension inFolder:(NSURL *)folderToScan forReferencesToMediaFilesWithRegexPattern:(NSString *)regexPatternForMediaFileReference addingFoundReferencesToArray: (NSMutableArray *)referencedMediaFiles {
+- (void)recursivelyScanFilesWithExtension:(NSString *)fileExtension inFolder:(NSURL *)folderToScan forReferencesToMediaFilesWithRegexPatterns:(NSArray<NSString *> *)regexPatternForMediaFileReferences addingFoundReferencesToArray: (NSMutableArray *)referencedMediaFiles {
     // ***************************************************************************************************************************************
     // ********** This function is called on a background thread - use dispatch_async(dispatch_get_main_queue() to Update UI *****************
     // ***************************************************************************************************************************************
     
-    // Setup REGEX
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexPatternForMediaFileReference options:0 error:nil];
-    
-
-    NSLog(@"Regex: %@", regex);
-
+    // Regular Expression
+    NSRegularExpression *regex;
     
     NSFileManager *localFileManager= [[NSFileManager alloc] init];
     NSDirectoryEnumerator *directoryEnumerator =
@@ -224,21 +218,25 @@ NSURL *sweeperResultsFile;
                 NSLog(@"Warning: File data/string size mismatch");
             }
             
-            // Grab all REGEX matches in an array
-            NSArray *matches = [regex matchesInString:proFileString
-                                              options:0
-                                                range:NSMakeRange(0, [proFileString length])];
-
-            // For each match, create a URL object and add to list
-            for (NSTextCheckingResult *match in matches) {
-                NSString *absolutePathToMediaFile = [proFileString substringWithRange:[match range]];
-                //NSLog(@"%@", absolutePathToMediaFile);
+            for (NSString *regexPatternForMediaFileReference in regexPatternForMediaFileReferences) {
+                regex = [NSRegularExpression regularExpressionWithPattern:regexPatternForMediaFileReference options:0 error:nil];
+                NSLog(@"Regex: %@", regex);
                 
-                // Add to list of media files
-                if (absolutePathToMediaFile) {
-                    [referencedMediaFiles addObject:absolutePathToMediaFile];
-                } else {
-                    NSLog(@"Error extracting absolutePathToMediaFile");
+                // Grab all REGEX matches in an array "matches"
+                NSArray *matches = [regex matchesInString:proFileString
+                                                  options:0
+                                                    range:NSMakeRange(0, [proFileString length])];
+
+                // For each match, extract the matching text and add to list
+                for (NSTextCheckingResult *match in matches) {
+                    NSString *absolutePathToMediaFile = [proFileString substringWithRange:[match range]];
+                    
+                    // Add to list of media files
+                    if (absolutePathToMediaFile) {
+                        [referencedMediaFiles addObject: [NSString stringWithFormat:@"%@ - %@", absolutePathToMediaFile, [fileURL path]]];
+                    } else {
+                        NSLog(@"Error extracting absolutePathToMediaFile");
+                    }
                 }
             }
             
@@ -256,6 +254,7 @@ NSURL *sweeperResultsFile;
         //[alert beginSheetModalForWindow:self.view.window completionHandler:nil];
     });
     */
+
 }
 
 - (void)setRepresentedObject:(id)representedObject {
