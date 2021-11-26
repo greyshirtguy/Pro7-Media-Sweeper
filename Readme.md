@@ -1,4 +1,4 @@
-# Pro7 Media Sweeper
+# ![icon](Icon.png)Pro7 Media Sweeper
 ### A *work-in-progess* MacOS port of [Pro7-Media-Sweeper](https://github.com/arlinsandbulte/Pro7-Media-Sweeper) by Arlin Sandbulte.
 ![Screenshot](ScreenShot.png)
 

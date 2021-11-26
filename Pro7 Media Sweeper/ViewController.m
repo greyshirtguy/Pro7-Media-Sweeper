@@ -106,7 +106,7 @@ NSURL *sweeperResultsFile;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-        [localFileManager createFileAtPath:[sweeperResultsFile path] contents:[[NSString  stringWithFormat: @"Pro7 Media Sweeper Results.\nMedia Sweep Started: %@", [dateFormatter stringFromDate:[NSDate date]]] dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
+        [localFileManager createFileAtPath:[sweeperResultsFile path] contents:[[NSString  stringWithFormat: @"Pro7 Media Sweeper Results.\nMedia Sweep Started: %@\n", [dateFormatter stringFromDate:[NSDate date]]] dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
         
         // Call function to scan folders
         [self scanMediaFolder:mediaFolderToScan includingSubFolders:includeSubFolders forMediaNotUsedByPro7SupportFiles:pro7SupportFolderURL];
@@ -152,6 +152,7 @@ NSURL *sweeperResultsFile;
     // TODO: Update to work with unicode filenames in any language.
     // For Pro7 files created on MacOS, absolute path starts with "file:///", then has any number of any chars followed by a . and then any number of alpha-numeric chars and is ended by two non-ascii chars (bytes 0x18 0x01).  (NB for later, it's also URL encoded with % escapes)
     NSString *patternAbsoluteMediaPath = [NSString stringWithFormat:@"file:///.*\\.([0-9]|[a-z]|[A-Z])*(?=%c%c)", 0x18,0x01];
+    
     // For Pro7 files created on MacOS, relative path starts with a non-ascii char (byte 0x12), then has any number of any chars followed by a . and then any number of alpha-numeric chars and is ended by two non-ascii chars (bytes 0x1a 0x06)
     NSString *patternRelativeMediaPath = [NSString stringWithFormat:@"(?<=%c.).*\\.([0-9]|[a-z]|[A-Z])*(?=%c%c)", 0x12,0x1A,0x06];
     
@@ -163,7 +164,10 @@ NSURL *sweeperResultsFile;
     NSURL *playlistFolderURL = [pro7SupportFolderURL URLByAppendingPathComponent:@"PlayLists"];
     [self recursivelyScanFilesWithExtension:nil inFolder:playlistFolderURL forReferencesToMediaFilesWithRegexPatterns:@[patternAbsoluteMediaPath,patternRelativeMediaPath] addingFoundReferencesToArray:referencedMediaFiles];
     
-    NSLog(@"%lu media files found.", (unsigned long)[referencedMediaFiles count]);
+    // Enumerate the entire contents of Configuration folder (and sub folders) and then read each file and add all found references to referencedMediaFiles array (using simple REGEX matching)
+    NSURL *configurationFolderURL = [pro7SupportFolderURL URLByAppendingPathComponent:@"Configuration"];
+    [self recursivelyScanFilesWithExtension:nil inFolder:configurationFolderURL forReferencesToMediaFilesWithRegexPatterns:@[patternAbsoluteMediaPath,patternRelativeMediaPath] addingFoundReferencesToArray:referencedMediaFiles];
+    
     
     for (NSString *filePath in referencedMediaFiles) {
         NSLog(@"%@", filePath);
@@ -220,7 +224,6 @@ NSURL *sweeperResultsFile;
             
             for (NSString *regexPatternForMediaFileReference in regexPatternForMediaFileReferences) {
                 regex = [NSRegularExpression regularExpressionWithPattern:regexPatternForMediaFileReference options:0 error:nil];
-                NSLog(@"Regex: %@", regex);
                 
                 // Grab all REGEX matches in an array "matches"
                 NSArray *matches = [regex matchesInString:proFileString
@@ -243,7 +246,12 @@ NSURL *sweeperResultsFile;
             
         }
     }
-    NSLog(@"%lu media files found.", (unsigned long)[referencedMediaFiles count]);
+    NSString *logUpdate = [NSString stringWithFormat:@"%lu media file references found in %@\n", (unsigned long)[referencedMediaFiles count], [folderToScan lastPathComponent]];
+    NSLog(@"%@", logUpdate);
+    NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingToURL:sweeperResultsFile error:nil]; // TODO: Consider error handling
+    [fileHandle seekToEndOfFile];
+    [fileHandle writeData:[logUpdate dataUsingEncoding:NSUTF8StringEncoding]];
+    [fileHandle closeFile];
     
     /*
     dispatch_async(dispatch_get_main_queue(), ^{
