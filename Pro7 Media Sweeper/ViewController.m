@@ -199,8 +199,8 @@ NSURL *sweeperResultsFile;
         return;
     }
     
-    // By default, let's scan *all* files - even hidden ones
-    NSDirectoryEnumerationOptions enumOptions = 0;
+    // By default, let's scan *all* files - except hidden ones
+    NSDirectoryEnumerationOptions enumOptions = NSDirectoryEnumerationSkipsHiddenFiles;
     
     // Check if user has selected to include all subfolders and setup NSDirectoryEnumerationOptions to suit selection.
     if (!includeSubFolders)
