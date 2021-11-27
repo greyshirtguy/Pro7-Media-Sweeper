@@ -353,7 +353,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PHt-lz-f7P">
-                                <rect key="frame" x="20" y="107" width="570" height="21"/>
+                                <rect key="frame" x="88" y="107" width="502" height="21"/>
                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="ADN-Ju-Hd4">
                                     <font key="font" metaFont="systemLight" size="13"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -361,7 +361,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ApY-1P-Doo">
-                                <rect key="frame" x="18" y="136" width="149" height="16"/>
+                                <rect key="frame" x="86" y="136" width="149" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Media Folder To Sweep:" id="5WO-07-xCa">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -421,6 +421,14 @@
                             <progressIndicator maxValue="100" doubleValue="50" displayedWhenStopped="NO" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="drV-7U-bah">
                                 <rect key="frame" x="338" y="-9" width="300" height="34"/>
                             </progressIndicator>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ucH-8d-JAN">
+                                <rect key="frame" x="16" y="101" width="56" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="VKB-fL-KDu"/>
+                                    <constraint firstAttribute="height" constant="56" id="Yif-2F-9YA"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="Icon" id="rkw-9O-P5y"/>
+                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="PHt-lz-f7P" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="44" id="1pX-yv-vg6"/>
@@ -429,8 +437,10 @@
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PmA-h7-Yt1" secondAttribute="trailing" constant="20" symbolic="YES" id="8ed-Hm-Z8O"/>
                             <constraint firstItem="hyi-YE-dGk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="BVG-x1-H8I"/>
                             <constraint firstAttribute="trailing" secondItem="hOq-Jr-gOV" secondAttribute="trailing" constant="20" id="FHM-fA-klJ"/>
+                            <constraint firstItem="ucH-8d-JAN" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="16" id="FIk-39-2Tk"/>
                             <constraint firstAttribute="bottom" secondItem="vVy-4F-2he" secondAttribute="bottom" constant="15" id="JJo-NI-tif"/>
                             <constraint firstItem="drV-7U-bah" firstAttribute="top" secondItem="hyi-YE-dGk" secondAttribute="bottom" constant="52" id="MNO-Dd-6Fw"/>
+                            <constraint firstItem="ucH-8d-JAN" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="15" id="OF5-uJ-6a2"/>
                             <constraint firstAttribute="bottom" secondItem="drV-7U-bah" secondAttribute="bottom" constant="-8" id="TB2-Y1-RKY"/>
                             <constraint firstItem="N1A-ag-4Bx" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="45" id="Ty5-3k-l9x"/>
                             <constraint firstAttribute="bottom" secondItem="hOq-Jr-gOV" secondAttribute="bottom" constant="15" id="UTy-4e-5QB"/>
@@ -438,10 +448,10 @@
                             <constraint firstItem="hOq-Jr-gOV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vVy-4F-2he" secondAttribute="trailing" constant="8" symbolic="YES" id="Yza-PP-Ox6"/>
                             <constraint firstItem="N1A-ag-4Bx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PHt-lz-f7P" secondAttribute="trailing" constant="8" symbolic="YES" id="aKP-FL-xM7"/>
                             <constraint firstItem="ApY-1P-Doo" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="aSO-g1-gBq"/>
-                            <constraint firstItem="ApY-1P-Doo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="aet-QP-I3t"/>
+                            <constraint firstItem="ApY-1P-Doo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="88" id="aet-QP-I3t"/>
                             <constraint firstItem="drV-7U-bah" firstAttribute="leading" secondItem="hOq-Jr-gOV" secondAttribute="leading" id="bRE-Ry-Ag9"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ApY-1P-Doo" secondAttribute="trailing" constant="20" symbolic="YES" id="bSv-SA-Xgx"/>
-                            <constraint firstItem="PHt-lz-f7P" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="gSZ-Ys-Mg7"/>
+                            <constraint firstItem="PHt-lz-f7P" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="88" id="gSZ-Ys-Mg7"/>
                             <constraint firstAttribute="trailing" secondItem="N1A-ag-4Bx" secondAttribute="trailing" constant="21" id="hrP-40-gJC"/>
                             <constraint firstItem="PmA-h7-Yt1" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="n8A-gl-PDb"/>
                             <constraint firstItem="vVy-4F-2he" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="uAm-PT-C7l"/>
@@ -463,6 +473,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Icon" width="42" height="42"/>
         <image name="magnifyingglass" catalog="system" width="15" height="15"/>
     </resources>
 </document>
