@@ -2,10 +2,10 @@
 ### A *work-in-progess* MacOS port of [Pro7-Media-Sweeper](https://github.com/arlinsandbulte/Pro7-Media-Sweeper) by Arlin Sandbulte.
 ![Screenshot](ScreenShot.png)
 
-This app is still in early development stage and not yet functional.  
-My plan is to make a crude, but effective, native MacOS app with Appkit/Storyboards/Objective-C.  
+This app is in early development stage - the first working beta is now ready.  
+Even though the Windows version by Arlin is a friendly script, this is a native MacOS app with Appkit/Storyboards/Objective-C
 
-*Perhaps if this MacOS port was done with a scripting language it might be easier for others to understand and contribute to - but I wanted to get this done in as little spare time as possible so I used old ways that were most comfortable for me.  Feel free to re-write in AppleScript, JavaSript, Python etc.*
+*Ideally if this MacOS port was done with a nice friendly scripting language it might be easier for others to understand and contribute to - but I wanted to get this done in as little spare time as possible so I used old ways that were most comfortable for me.  Feel free to re-write in AppleScript, JavaSript, Python etc.*
 
 
 ### TODO:
@@ -21,9 +21,9 @@ My plan is to make a crude, but effective, native MacOS app with Appkit/Storyboa
 10. ~~Enumerate through all propresenter files in library and add to list of referenced media files.~~
 11. ~~Add scanning progress UI?~~
 12. ~~Enumerate through all playlist files and add to list of referenced media files~~
-13. Perform tests to validate complete list of referenced media files is correct
-14. Once confident in the list of all referenced media files, enumerate files in selected Media folder and for each one not recorded as being referenced by Pro7, move to swept folder (maintain same folder structure)
-15. Record any errors moving files.
+13. ~~Perform tests to validate complete list of referenced media files is correct~~
+14. ~~Once confident in the list of all referenced media files, enumerate files in selected Media folder and for each one not recorded as being referenced by Pro7, move to swept folder (maintain same folder structure)~~
+15. ~~Record any errors moving files.~~
 16. Record an undo script and add UI to show and run UNDOs?
 17. Update UI with completion message and any error reports (and UNDO option?)
 
