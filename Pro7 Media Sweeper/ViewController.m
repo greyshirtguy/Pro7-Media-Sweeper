@@ -178,7 +178,6 @@ NSURL *sweeperResultsFile;
     NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingToURL:sweeperResultsFile error:nil]; // TODO: Consider error handling
     [fileHandle seekToEndOfFile];
     [fileHandle writeData:[logUpdate dataUsingEncoding:NSUTF8StringEncoding]];
-    [fileHandle closeFile];
     
     // Debug logging to console
     for (NSString *filePath in referencedMediaFiles) {
@@ -195,10 +194,8 @@ NSURL *sweeperResultsFile;
         //Update results
         NSString *logUpdate = [NSString stringWithFormat:@"Could not find selected media folder %@.\n", [mediaFolderToScanURL path]];
         NSLog(@"%@", logUpdate);
-        NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingToURL:sweeperResultsFile error:nil]; // TODO: Consider error handling
         [fileHandle seekToEndOfFile];
         [fileHandle writeData:[logUpdate dataUsingEncoding:NSUTF8StringEncoding]];
-        [fileHandle closeFile];
         return;
     }
     
@@ -215,6 +212,9 @@ NSURL *sweeperResultsFile;
               includingPropertiesForKeys:@[NSURLNameKey, NSURLIsDirectoryKey]
                                  options:enumOptions
                             errorHandler:nil];
+    
+    long movedFileCount = 0;
+    long movedFileErrorCount = 0;
     
     // Enumerate all files in selected Media folder and check if each one can be found in referencedMediaFiles array
     for (NSURL *mediaFileURL in directoryEnumerator) {
@@ -239,9 +239,32 @@ NSURL *sweeperResultsFile;
         
         if (index == NSNotFound) {
             NSLog(@"NO: %@", [mediaFileURL path]);
-            // TODO: Create destination folder (if not already exists)
-            // TODO: Move Media file to destination folder
-            // TODO: Increment Move Count
+            // Determine destination folder.
+            NSString *subFolderHierachy = [[[mediaFileURL URLByDeletingLastPathComponent] path] stringByReplacingOccurrencesOfString:[mediaFolderToScanURL path] withString:@""];
+            NSURL *sweepDestinationFolder = [sweeperSweptMediaFolder URLByAppendingPathComponent:subFolderHierachy];
+            NSURL *mediaDestinationURL = [sweepDestinationFolder URLByAppendingPathComponent:[mediaFileURL lastPathComponent]];
+            
+            // Create destination folder (if not already exists)
+            NSError * error = nil;
+            [[NSFileManager defaultManager] createDirectoryAtPath:[sweepDestinationFolder path]
+                                      withIntermediateDirectories:YES
+                                                       attributes:nil
+                                                            error:&error];
+            if (error != nil) {
+                NSLog(@"Error %@ creating directory: %@", error, sweepDestinationFolder);
+            }
+            
+            // Move Media file to destination folder
+            error = nil;
+            [localFileManager moveItemAtURL:mediaFileURL toURL:mediaDestinationURL error:&error];
+            if (error !=nil) {
+                NSLog(@"Error moving file %@ to %@", mediaFileURL, mediaDestinationURL);
+                movedFileErrorCount++;
+            }
+            
+            // Increment Move Count
+            movedFileCount++;
+            
         } else {
             NSLog(@"YES: %@ - (%@)", [mediaFileURL path], referencedMediaFiles[index]);
         }
@@ -251,8 +274,12 @@ NSURL *sweeperResultsFile;
     }
     
     
-    
-    // TODO: Update SweepResults file with movecount.
+    // Update SweepResults file with movecount.
+    logUpdate = [NSString stringWithFormat:@"Moved %ld files.\n%ld errors moving files", movedFileCount, movedFileErrorCount];
+    NSLog(@"%@", logUpdate);
+    [fileHandle seekToEndOfFile];
+    [fileHandle writeData:[logUpdate dataUsingEncoding:NSUTF8StringEncoding]];
+    [fileHandle closeFile];
 
 }
 
