@@ -6,6 +6,8 @@
 It scans all your Pro7 documents in all libraries and then scans your playlists, props and themes for any references/links to media files - building a list of every media file used by your current Pro7 setup.
 It then scans the "Media Folder To Sweep" that you selected to find any media files in there that are NOT used in your current Pro7 setup. ie. Not used in any docs, playlists, props, stage displays, themes etc.
 
+Scanning for media file references is done using simple REGEX search on the binary files. Treating the binary file data as single-byte strings allows searching for simple patterns at the start and end of media file references. (See the TWO REGEX patterns used for searching.)
+
 During the scan, any files that are not being "used" by your Pro7 setup are MOVED to "Swept Media Files" folder in your home folder - So that you now have a single folder containing all media files NOT used by Pro7.
 You can then archive those un-used media files to other storage to save disk space.
 
@@ -18,8 +20,8 @@ Until this app has been tested some more and made into a non-beta release, consi
 This is a port of a Windows version by Arlin Sandbulte.  His version is a user-friendly AutoHotKey script.
 I offered to make an AppleScript port and failed (miserably)!  So in order to somewhat honour my original offer, I made a native MacOS App (Appkit/Storyboards/Objective-C)
 
-*Ideally if this MacOS port was done with a nice friendly scripting language it might be easier for others to understand and contribute to - but I wanted to get this done my spare time as quick as possible.
-So I used my "old ways" that were most comfortable for me.  Feel free to re-write in AppleScript, JavaSript, Python etc.*
+*Ideally if this MacOS port was done with a nice friendly scripting language it might be easier for others to understand and contribute to - but I wanted to get this done in my spare time as quick as possible.
+So after failing to learn enough AppleSCript to port Arlin's AHK script, I fell-back onto my "old ways" and made a native Mac App. All logic is in the ViewController (Yes, I used the "Giant ViewController" noob design pattern for this "tiny" app!) Feel free to re-write in AppleScript, JavaSript, Python etc.*
 
 
 ### TODO:
