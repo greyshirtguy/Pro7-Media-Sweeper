@@ -203,10 +203,8 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
     NSString *logUpdate = [NSString stringWithFormat:@"%lu media file references found in Pro7 library documents and configs.", (unsigned long)[referencedMediaFiles count]];
     [sweepResultsFileHandle seekToEndOfFile];
     [sweepResultsFileHandle writeData:[[logUpdate stringByAppendingString:@"\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [sweepResultsFileHandle writeData:[[NSString  stringWithFormat: @"Scanning: %@ (%@Including SubFolders) for files not referenced by Pro7\n", [mediaFolderToScanURL path], includeSubFolders ? @"" : @"Not "] dataUsingEncoding:NSUTF8StringEncoding]];
     // Update log file
     [self appendStringToLogFile:logUpdate];
-    
     
     
     // Log all referenced media files
@@ -315,7 +313,11 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
     }
     
     
-    // Update SweepResults (and log file) file with movecount.
+    // Scan complete update results file
+    [sweepResultsFileHandle seekToEndOfFile];
+    [sweepResultsFileHandle writeData:[[NSString  stringWithFormat: @"Scanned: %@ (%@Including SubFolders) for files not referenced by Pro7\n", [mediaFolderToScanURL path], includeSubFolders ? @"" : @"Not "] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // Also, update SweepResults (and log file) with move count (and/or errors)
     if (movedFileCount == 0 && movedFileErrorCount == 0) {
         logUpdate = @"No unreferenced media files found. Nothing moved.";
     } else {
@@ -326,7 +328,6 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
         }
     }
     [self appendStringToLogFile:logUpdate];
-    [sweepResultsFileHandle seekToEndOfFile];
     [sweepResultsFileHandle writeData:[logUpdate dataUsingEncoding:NSUTF8StringEncoding]];
     
     // All Done - close the results summary file
