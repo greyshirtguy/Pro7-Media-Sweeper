@@ -45,7 +45,7 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
     sweeperAppFolder = [userHomeFolder URLByAppendingPathComponent:@"Pro7 Media Sweeper"];
     sweeperSweptMediaFolder = [sweeperAppFolder URLByAppendingPathComponent:@"Swept Media Files"];
     sweeperResultsFile = [sweeperAppFolder URLByAppendingPathComponent:@"Sweeper Results.txt"];
-    logFileURL = [sweeperAppFolder URLByAppendingPathComponent:@"Sweeper.log"];
+    logFileURL = [sweeperAppFolder URLByAppendingPathComponent:@"Sweeper Log.txt"];
     
     // Create log file if it does not exit
     if (![localFileManager fileExistsAtPath:[logFileURL path]]) {
@@ -227,7 +227,7 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
         return;
     }
     
-    // By default, let's scan *all* files - except hidden ones
+    // Scan *all* files - except hidden ones
     NSDirectoryEnumerationOptions enumOptions = NSDirectoryEnumerationSkipsHiddenFiles;
     
     // Check if user has selected to include all subfolders and setup NSDirectoryEnumerationOptions to suit selection.
@@ -244,14 +244,28 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
     long movedFileCount = 0;
     long movedFileErrorCount = 0;
     
+    // Setup & create "undo" file - one for each scan by using timestamp with seconds (unless user bangs on scan button multiple times per second on a super fast computer)
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd__HH-mm-ss"];
+    NSError *error;
+    NSURL *undoFolderURL = [sweeperAppFolder URLByAppendingPathComponent:@"Sweeper Undo Files"];
+    if (![localFileManager fileExistsAtPath:[undoFolderURL path]]) {
+        [localFileManager createDirectoryAtURL:undoFolderURL withIntermediateDirectories:YES attributes:nil error:&error];
+    }
+    NSURL *undoFileURL = [undoFolderURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Sweeper Undo %@.txt",[dateFormatter stringFromDate:[NSDate date]]]];
+    [localFileManager createFileAtPath:[undoFileURL path] contents:nil attributes:nil];
+    NSFileHandle *undoFile = [NSFileHandle fileHandleForWritingToURL:undoFileURL error:&error]; //TODO: Consider if error handling needed here
+    
     // Enumerate all files in selected Media folder and check if each one can be found in referencedMediaFiles array
     for (NSURL *mediaFileURL in directoryEnumerator) {
         
         // Skip directories (only check files)
         NSNumber *isDir;
         [mediaFileURL getResourceValue:&isDir forKey:NSURLIsDirectoryKey error:nil];
-        if ([isDir boolValue])
+        if ([isDir boolValue]) {
+            [undoFile writeData:[[NSString stringWithFormat:@"Create: %@\n", mediaFileURL] dataUsingEncoding:NSUTF8StringEncoding]];
             continue;
+        }
         
         // Find (index of) first item is array of referenced media files that matches the current media file.
         NSUInteger index = [referencedMediaFiles indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
@@ -295,6 +309,8 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
                 if (error == nil) {
                     // Moved! - Increment Move Count
                     movedFileCount++;
+                    // Update UNDO file
+                    [undoFile writeData:[[NSString stringWithFormat:@"Move: %@ to %@\n", mediaDestinationURL, mediaFileURL] dataUsingEncoding:NSUTF8StringEncoding]];
                 } else {
                     // Could not move - update log
                     [self appendStringToLogFile:[NSString stringWithFormat:@"Error %@ moving file %@ to %@", error.localizedDescription, [mediaFileURL path], [mediaDestinationURL path]]];
