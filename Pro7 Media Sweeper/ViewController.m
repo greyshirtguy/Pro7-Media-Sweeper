@@ -10,11 +10,15 @@
 
 @implementation ViewController
 
-// These are set in viewDidLoad
+// "Data" used by app - (Most of these are set in viewDidLoad or when a sweep is started)
 NSURL *sweeperAppFolder;
 NSURL *sweeperSweptMediaFolder;
-NSURL *sweeperResultsFile;
+NSURL *sweeperResultsFile; // Location of text file with summary of the sweep.
+NSFileHandle *sweepResultsFileHandle; // Writeable handle to results file.
 NSURL *pro7SupportFolderURL;
+NSURL *logFileURL; // Location of log File for support/debug info
+NSFileHandle *logFileHandle; // Writeable handle to log file
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,6 +45,15 @@ NSURL *pro7SupportFolderURL;
     sweeperAppFolder = [userHomeFolder URLByAppendingPathComponent:@"Pro7 Media Sweeper"];
     sweeperSweptMediaFolder = [sweeperAppFolder URLByAppendingPathComponent:@"Swept Media Files"];
     sweeperResultsFile = [sweeperAppFolder URLByAppendingPathComponent:@"Sweeper Results.txt"];
+    logFileURL = [sweeperAppFolder URLByAppendingPathComponent:@"Sweeper.log"];
+    
+    // Create log file if it does not exit
+    if (![localFileManager fileExistsAtPath:[logFileURL path]]) {
+        [localFileManager createFileAtPath:[logFileURL path] contents:nil attributes:nil];
+    }
+    
+    // Open logFile for writing
+    logFileHandle = [NSFileHandle fileHandleForWritingToURL:logFileURL error:nil]; // TODO: Consider error handling
     
     // Display swept files folder (resolve any Tilde prefix if present, to show full path)
     [self.sweptFilesFolderTextField setStringValue:[[sweeperSweptMediaFolder path] stringByExpandingTildeInPath]];
@@ -91,6 +104,9 @@ NSURL *pro7SupportFolderURL;
 
 - (IBAction)sweepButtonClicked:(NSButton *)sender {
     // TODO: Should we check if Pro7 is running - is there any chance of negative impact of opening/reading all library documents etc while Pro7 is open?
+    
+    // Open Sweep Results File for writing.
+    sweepResultsFileHandle = [NSFileHandle fileHandleForWritingToURL:sweeperResultsFile error:nil]; // TODO: Consider error handling
         
     // Create NSURL to point to selected Media Folder (Expand any ~ in the given path, and convert any invalid chars like & to std percent encoding used by URLs - just in case library folder contains such chars)
     NSURL *mediaFolderToScanURL = [NSURL URLWithString:[[[self.mediaFolderTextField stringValue] stringByExpandingTildeInPath] stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
@@ -108,11 +124,13 @@ NSURL *pro7SupportFolderURL;
     // NB: This means that the sweep function must use dispatch_async(dispatch_get_main_queue() to Update UI (Sorry - destroying the MVC design pattern here - I know!)
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         // Create new results file
-        NSFileManager *localFileManager= [[NSFileManager alloc] init];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-        [localFileManager createFileAtPath:[sweeperResultsFile path] contents:[[NSString  stringWithFormat: @"Pro7 Media Sweeper Results.\nMedia Sweep Started: %@\n", [dateFormatter stringFromDate:[NSDate date]]] dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
+        [sweepResultsFileHandle truncateFileAtOffset:0]; // Start at begining to overwrite results file...
+        
+        // Update Log File
+        [self appendStringToLogFile:[NSString  stringWithFormat: @"***************************************************************\nMedia Sweep Started: %@\n***************************************************************\n", [dateFormatter stringFromDate:[NSDate date]]]];
         
         // Call function to scan folders
         [self scanMediaFolder:mediaFolderToScanURL includingSubFolders:includeSubFolders forMediaNotUsedByPro7SupportFiles:pro7SupportFolderURL];
@@ -149,7 +167,6 @@ NSURL *pro7SupportFolderURL;
     // ***************************************************************************************************************************************
     // ********** This function is called on a background thread - use dispatch_async(dispatch_get_main_queue() to Update UI *****************
     // ***************************************************************************************************************************************
-        
     
     // **************************************************************************************
     // Build list of all references to media files from all library documents and playlists
@@ -182,16 +199,19 @@ NSURL *pro7SupportFolderURL;
     NSURL *configurationFolderURL = [pro7SupportFolderURL URLByAppendingPathComponent:@"Configuration"];
     [self recursivelyScanPro7FilesWithExtension:nil inFolder:configurationFolderURL forReferencesToMediaFilesWithRegexPatterns:@[patternAbsoluteMediaPath,patternRelativeMediaPath] addingFoundReferencesToArray:referencedMediaFiles];
     
-    //Update results
-    NSString *logUpdate = [NSString stringWithFormat:@"%lu media file references found in Pro7 files.\n", (unsigned long)[referencedMediaFiles count]];
-    NSLog(@"%@", logUpdate);
-    NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingToURL:sweeperResultsFile error:nil]; // TODO: Consider error handling
-    [fileHandle seekToEndOfFile];
-    [fileHandle writeData:[logUpdate dataUsingEncoding:NSUTF8StringEncoding]];
+    //Update results file
+    NSString *logUpdate = [NSString stringWithFormat:@"%lu media file references found in Pro7 library documents and configs.", (unsigned long)[referencedMediaFiles count]];
+    [sweepResultsFileHandle seekToEndOfFile];
+    [sweepResultsFileHandle writeData:[[logUpdate stringByAppendingString:@"\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [sweepResultsFileHandle writeData:[[NSString  stringWithFormat: @"Scanning: %@ (%@Including SubFolders) for files not referenced by Pro7\n", [mediaFolderToScanURL path], includeSubFolders ? @"" : @"Not "] dataUsingEncoding:NSUTF8StringEncoding]];
+    // Update log file
+    [self appendStringToLogFile:logUpdate];
     
-    // Debug logging to console
+    
+    
+    // Log all referenced media files
     for (NSString *filePath in referencedMediaFiles) {
-        NSLog(@"%@", filePath);
+        [self appendStringToLogFile:filePath];
     }
     
     // ********************
@@ -201,11 +221,11 @@ NSURL *pro7SupportFolderURL;
     // Setup localFileManager and check selected media folder exists
     NSFileManager *localFileManager= [[NSFileManager alloc] init];
     if (![localFileManager fileExistsAtPath:[mediaFolderToScanURL path]]) {
-        //Update results
+        //Update results in log file and results file
         NSString *logUpdate = [NSString stringWithFormat:@"Could not find selected media folder %@.\n", [mediaFolderToScanURL path]];
-        NSLog(@"%@", logUpdate);
-        [fileHandle seekToEndOfFile];
-        [fileHandle writeData:[logUpdate dataUsingEncoding:NSUTF8StringEncoding]];
+        [self appendStringToLogFile:logUpdate];
+        [sweepResultsFileHandle seekToEndOfFile];
+        [sweepResultsFileHandle writeData:[logUpdate dataUsingEncoding:NSUTF8StringEncoding]];
         return;
     }
     
@@ -248,7 +268,7 @@ NSURL *pro7SupportFolderURL;
         }];
         
         if (index == NSNotFound) {
-            NSLog(@"NO: %@", [mediaFileURL path]);
+            [self appendStringToLogFile:[NSString stringWithFormat:@"NO: %@", [mediaFileURL path]]];
             // Determine destination folder.
             NSString *subFolderHierachy = [[[mediaFileURL URLByDeletingLastPathComponent] path] stringByReplacingOccurrencesOfString:[mediaFolderToScanURL path] withString:@""];
             NSURL *sweepDestinationFolder = [sweeperSweptMediaFolder URLByAppendingPathComponent:subFolderHierachy];
@@ -261,35 +281,56 @@ NSURL *pro7SupportFolderURL;
                                                        attributes:nil
                                                             error:&error];
             if (error != nil) {
-                NSLog(@"Error %@ creating directory: %@", error, sweepDestinationFolder);
+                [self appendStringToLogFile:[NSString stringWithFormat:@"Error %@ creating directory: %@", error.localizedDescription, sweepDestinationFolder]];
             }
             
-            // Move Media file to destination folder
             error = nil;
-            [localFileManager moveItemAtURL:mediaFileURL toURL:mediaDestinationURL error:&error];
-            if (error !=nil) {
-                NSLog(@"Error moving file %@ to %@", mediaFileURL, mediaDestinationURL);
+            // If destination file exists (from a previous sweep), delete it (to allow move to proceed)
+            // TODO: Consider renaming existing rather than overwritting.
+            if ([localFileManager fileExistsAtPath:[mediaDestinationURL path]]) {
+                [localFileManager removeItemAtURL:mediaDestinationURL error:&error];
+            }
+            
+            if (error == nil) {
+                // Move Media file to destination folder
+                [localFileManager moveItemAtURL:mediaFileURL toURL:mediaDestinationURL error:&error];
+                if (error == nil) {
+                    // Moved! - Increment Move Count
+                    movedFileCount++;
+                } else {
+                    // Could not move - update log
+                    [self appendStringToLogFile:[NSString stringWithFormat:@"Error %@ moving file %@ to %@", error.localizedDescription, [mediaFileURL path], [mediaDestinationURL path]]];
+                    movedFileErrorCount++;
+                }
+            } else {
+                // File already exists and could not remove it to sweep in same named file.
+                [self appendStringToLogFile:[NSString stringWithFormat:@"Error %@ removing existing swept file %@", error.localizedDescription, [mediaDestinationURL path]]];
                 movedFileErrorCount++;
             }
             
-            // Increment Move Count
-            movedFileCount++;
-            
         } else {
-            NSLog(@"YES: %@ - (%@)", [mediaFileURL path], referencedMediaFiles[index]);
+            // Found references to media file.. No action requried.  (Add to log)
+            [self appendStringToLogFile:[NSString stringWithFormat:@"YES: %@ - (%@)", [mediaFileURL path], referencedMediaFiles[index]]];
         }
-            
-        
-        
     }
     
     
-    // Update SweepResults file with movecount.
-    logUpdate = [NSString stringWithFormat:@"Moved %ld files.\n%ld errors moving files", movedFileCount, movedFileErrorCount];
-    NSLog(@"%@", logUpdate);
-    [fileHandle seekToEndOfFile];
-    [fileHandle writeData:[logUpdate dataUsingEncoding:NSUTF8StringEncoding]];
-    [fileHandle closeFile];
+    // Update SweepResults (and log file) file with movecount.
+    if (movedFileCount == 0 && movedFileErrorCount == 0) {
+        logUpdate = @"No unreferenced media files found. Nothing moved.";
+    } else {
+        if (movedFileErrorCount == 0) {
+            logUpdate = [NSString stringWithFormat:@"Moved %ld unreferenced files into %@", movedFileCount, [sweeperSweptMediaFolder path]];
+        } else {
+            logUpdate = [NSString stringWithFormat:@"Moved %ld unreferenced files into %@\n%ld files could not be moved. (See Sweeper.log) ", movedFileCount, [sweeperSweptMediaFolder path], movedFileErrorCount];
+        }
+    }
+    [self appendStringToLogFile:logUpdate];
+    [sweepResultsFileHandle seekToEndOfFile];
+    [sweepResultsFileHandle writeData:[logUpdate dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // All Done - close the results summary file
+    [sweepResultsFileHandle closeFile];
 
 }
 
@@ -303,13 +344,10 @@ NSURL *pro7SupportFolderURL;
     
     NSFileManager *localFileManager= [[NSFileManager alloc] init];
     if (![localFileManager fileExistsAtPath:[folderToScan path]]) {
-        //Update results
+        //Update log & results file
         NSString *logUpdate = [NSString stringWithFormat:@"Could not find folder %@.\n", [folderToScan path]];
-        NSLog(@"%@", logUpdate);
-        NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingToURL:sweeperResultsFile error:nil]; // TODO: Consider error handling
-        [fileHandle seekToEndOfFile];
-        [fileHandle writeData:[logUpdate dataUsingEncoding:NSUTF8StringEncoding]];
-        [fileHandle closeFile];
+        [self appendStringToLogFile:logUpdate];
+        [sweepResultsFileHandle writeData:[logUpdate dataUsingEncoding:NSUTF8StringEncoding]];
         return;
     }
         
@@ -332,7 +370,7 @@ NSURL *pro7SupportFolderURL;
             
             // For debugging purposes - Log any mismatch of reading file as NSData vs NSString
             if ([proFileData length] != [proFileString length]) {
-                NSLog(@"Warning: File data/string size mismatch");
+                [self appendStringToLogFile:[NSString stringWithFormat:@"Warning: File data/string size mismatch for %@", [fileURL path]]];
             }
             
             for (NSString *regexPatternForMediaFileReference in regexPatternForMediaFileReferences) {
@@ -360,6 +398,7 @@ NSURL *pro7SupportFolderURL;
                         //[referencedMediaFiles addObject:[pathToMediaFile stringByAppendingString:[fileURL path]]]; // Debugging option to capture filename
                     } else {
                         NSLog(@"Error extracting pathToMediaFile");
+                        [self appendStringToLogFile:[NSString stringWithFormat:@"Error extracting pathToMediaFile for match %@", match]];
                     }
                 }
             }
@@ -367,8 +406,8 @@ NSURL *pro7SupportFolderURL;
             
         }
     }
-    NSString *logUpdate = [NSString stringWithFormat:@"%lu media file references found after scanning %@\n", (unsigned long)[referencedMediaFiles count], [folderToScan lastPathComponent]];
-    NSLog(@"%@", logUpdate);
+    NSString *logUpdate = [NSString stringWithFormat:@"%lu media file references found after scanning %@", (unsigned long)[referencedMediaFiles count], [folderToScan lastPathComponent]];
+    [self appendStringToLogFile:logUpdate];
     
     /*
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -383,11 +422,29 @@ NSURL *pro7SupportFolderURL;
 }
 
 
+- (void) appendStringToLogFile:(NSString *)logString {
+    
+    // Call these on main thread (in case loggin is request from background thread)
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // Ensure we are appending to end of log file
+        [logFileHandle seekToEndOfFile];
+        
+        // Write string (including a newline)
+        [logFileHandle writeData:[[logString stringByAppendingString:@"\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        // Make sure file is up-to-date
+        [logFileHandle synchronizeFile];
+        
+        // Include log entries on console output
+        NSLog(@"%@", logString);
+        
+    });
+}
+
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];
 
     // Update the view, if already loaded.
 }
-
 
 @end
