@@ -1,5 +1,5 @@
 # ![icon](Icon.png) Pro7 Media Sweeper
-### A *work-in-progess* MacOS port of [Pro7-Media-Sweeper](https://github.com/arlinsandbulte/Pro7-Media-Sweeper) by Arlin Sandbulte.
+### A MacOS port of [Pro7-Media-Sweeper](https://github.com/arlinsandbulte/Pro7-Media-Sweeper) by Arlin Sandbulte.
 ![Screenshot](ScreenShot.png)
 
 This app is in early development stage - It is a working beta that is now ready to test.
@@ -14,6 +14,5 @@ So in order to honour my original offer (in some way), I made this as a native M
 
 
 ### TODO:
-1. Create verbose log file (log "all the things" to help with support requests).
-2. Create UNDO script for each scan
-
+1. Create UNDO script for each scan
+2. Consider upgrading scan from using REGEX to code that works with [ProPresenter7 Protocol Buffers](https://github.com/greyshirtguy/ProPresenter7-Proto).

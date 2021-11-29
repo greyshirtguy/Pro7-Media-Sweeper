@@ -346,7 +346,7 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
     NSFileManager *localFileManager= [[NSFileManager alloc] init];
     if (![localFileManager fileExistsAtPath:[folderToScan path]]) {
         //Update log & results file
-        NSString *logUpdate = [NSString stringWithFormat:@"Could not find folder %@.\n", [folderToScan path]];
+        NSString *logUpdate = [NSString stringWithFormat:@"Could not find folder %@\n", [folderToScan path]];
         [self appendStringToLogFile:logUpdate];
         [sweepResultsFileHandle writeData:[logUpdate dataUsingEncoding:NSUTF8StringEncoding]];
         return;
@@ -398,7 +398,6 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
                         [referencedMediaFiles addObject:pathToMediaFile];
                         //[referencedMediaFiles addObject:[pathToMediaFile stringByAppendingString:[fileURL path]]]; // Debugging option to capture filename
                     } else {
-                        NSLog(@"Error extracting pathToMediaFile");
                         [self appendStringToLogFile:[NSString stringWithFormat:@"Error extracting pathToMediaFile for match %@", match]];
                     }
                 }
