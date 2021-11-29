@@ -61,7 +61,7 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
 }
 
 - (void) viewDidAppear {
-    // Setup "Pro7 Media Sweeper" Application folder if not found when view first appears (allows showing)
+    // Setup "Pro7 Media Sweeper" Application folder if not found when view first appears (viewDidLoad is too early in lifecycle for showing an NSAlert)
     NSFileManager *localFileManager= [[NSFileManager alloc] init];
     NSError *error = nil;
     if (![localFileManager fileExistsAtPath:[[sweeperAppFolder path] stringByExpandingTildeInPath]]) {
@@ -104,12 +104,10 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
 }
 
 - (IBAction)sweepButtonClicked:(NSButton *)sender {
-    // TODO: Should we check if Pro7 is running - is there any chance of negative impact of opening/reading all library documents etc while Pro7 is open?
-    
     // Open Sweep Results File for writing.
     sweepResultsFileHandle = [NSFileHandle fileHandleForWritingToURL:sweeperResultsFile error:nil]; // TODO: Consider error handling
         
-    // Create NSURL to point to selected Media Folder (Expand any ~ in the given path, and convert any invalid chars like & to std percent encoding used by URLs - just in case library folder contains such chars)
+    // Create NSURL to point to selected Media Folder (Expand any ~ in the given path, and convert any invalid chars like & to std percent encoding used by URLs - just in case folder contains such chars)
     NSURL *mediaFolderToScanURL = [NSURL URLWithString:[[[self.mediaFolderTextField stringValue] stringByExpandingTildeInPath] stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
     
     // Create BOOL to represent inclusion of sub-folders in the scan.
@@ -122,7 +120,7 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
     [self.sweepButton setEnabled:false];
     
     // Call the sweep function on a background thread (to allow UI to animate/update during the sweep)
-    // NB: This means that the sweep function must use dispatch_async(dispatch_get_main_queue() to Update UI (Sorry - destroying the MVC design pattern here - I know!)
+    // NB: This means that the sweep function must use dispatch_async(dispatch_get_main_queue() to Update UI (Sorry - I'm destroying the MVC design pattern here - I know!)
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         // Create new results file
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -136,6 +134,7 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
         // Call function to scan folders
         [self scanMediaFolder:mediaFolderToScanURL includingSubFolders:includeSubFolders forMediaNotUsedByPro7SupportFiles:pro7SupportFolderURL];
         
+        // Scan complete, jump back to main thread for UI updates.
         dispatch_async(dispatch_get_main_queue(), ^{
             // Update UI to show scanning has completed
             [self.progressIndicator stopAnimation:nil];
@@ -154,7 +153,6 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
             [alert setAccessoryView:[[NSView alloc] initWithFrame:NSMakeRect(0, 0, 600, 0)]];
             [alert beginSheetModalForWindow:self.view.window completionHandler:nil];
             
-            // TODO: Auto open swept files folder in Finder (maybe have button to manually open)??
         });
     });
 }
@@ -179,7 +177,7 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
     NSMutableArray<NSString *> *referencedMediaFiles = [NSMutableArray array];
     
     // Patterns to find paths referencing media files - These patterns work when representing the file data as NSStrings with any english encoding that uses ONE byte chars (This program will use NSISOLatin1StringEncoding)
-    // TODO: Update to work with unicode filenames in any language.
+    // TODO: Update to work with unicode filenames in any language (prob requires parsing the protcol buffers properly!)
     // For Pro7 files created on MacOS, absolute path starts with "file:///", then has any number of any chars followed by a . and then any number of alpha-numeric chars and is ended by two non-ascii chars (bytes 0x18 0x01).  (NB for later, it's also URL encoded with % escapes)
     // For Pro7 files created on Windows, absolute path starts with DriveLetter:\, then has any number of chars followed by a . and then any number of alpha-numeric chars and is ended by two non-ascii chars (bytes 0x18 0x02). (Note the last byte is 0x02 instead of 0x01)
     NSString *patternAbsoluteMediaPath = [NSString stringWithFormat:@"file:///.*\\.([0-9]|[a-z]|[A-Z])*(?=%c%c)", 0x18,0x01];
@@ -197,25 +195,25 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
     [self recursivelyScanPro7FilesWithExtension:nil inFolder:playlistFolderURL forReferencesToMediaFilesWithRegexPatterns:@[patternAbsoluteMediaPath,patternRelativeMediaPath] addingFoundReferencesToArray:referencedMediaFiles];
     
     // Enumerate the entire contents of Configuration folder (and sub folders) and then read each file and add all found references to referencedMediaFiles array (using simple REGEX matching)
+    // This will pickup media link in themes, stage displays, props etc
     NSURL *configurationFolderURL = [pro7SupportFolderURL URLByAppendingPathComponent:@"Configuration"];
     [self recursivelyScanPro7FilesWithExtension:nil inFolder:configurationFolderURL forReferencesToMediaFilesWithRegexPatterns:@[patternAbsoluteMediaPath,patternRelativeMediaPath] addingFoundReferencesToArray:referencedMediaFiles];
     
-    //Update results file
+    // Update results summary file
     NSString *logUpdate = [NSString stringWithFormat:@"%lu media file references found in Pro7 library documents and configs.", (unsigned long)[referencedMediaFiles count]];
     [sweepResultsFileHandle seekToEndOfFile];
     [sweepResultsFileHandle writeData:[[logUpdate stringByAppendingString:@"\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     // Update log file
     [self appendStringToLogFile:logUpdate];
     
-    
     // Log all referenced media files
     for (NSString *filePath in referencedMediaFiles) {
         [self appendStringToLogFile:filePath];
     }
     
-    // ********************
-    // Scan media folder
-    // ********************
+    // ************************************************************************************************************************
+    // Okay, we now have a list of all media files used by Prro7 - Let's scan the selected media folder...
+    // ************************************************************************************************************************
     
     // Setup localFileManager and check selected media folder exists
     NSFileManager *localFileManager= [[NSFileManager alloc] init];
@@ -228,10 +226,10 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
         return;
     }
     
-    // Scan *all* files - except hidden ones
+    // Setup enumartion options to Scan *all* files - except hidden ones
     NSDirectoryEnumerationOptions enumOptions = NSDirectoryEnumerationSkipsHiddenFiles;
     
-    // Check if user has selected to include all subfolders and setup NSDirectoryEnumerationOptions to suit selection.
+    // Check if user has selected to include all subfolders and modify NSDirectoryEnumerationOptions to suit their selection.
     if (!includeSubFolders)
         enumOptions = enumOptions | NSDirectoryEnumerationSkipsSubdirectoryDescendants;
     
@@ -242,6 +240,7 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
                                  options:enumOptions
                             errorHandler:nil];
     
+    // Keep a count of moved files (and files that could not be moved)
     long movedFileCount = 0;
     long movedFileErrorCount = 0;
     
@@ -260,7 +259,7 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
     // Enumerate all files in selected Media folder and check if each one can be found in referencedMediaFiles array
     for (NSURL *mediaFileURL in directoryEnumerator) {
         
-        // Skip directories (only check files)
+        // Skip directories as we only need to run check on files - (except, note each dir for potential re-creation in the undo file)
         NSNumber *isDir;
         [mediaFileURL getResourceValue:&isDir forKey:NSURLIsDirectoryKey error:nil];
         if ([isDir boolValue]) {
@@ -276,10 +275,10 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
                 *stop = YES;
                 return YES;
             }
-            
             return NO;
         }];
         
+        // Was this media file found in the list of media files used by Pro7?
         if (index == NSNotFound) {
             [self appendStringToLogFile:[NSString stringWithFormat:@"NO: %@", [mediaFileURL path]]];
             // Determine destination folder.
@@ -426,22 +425,12 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
     NSString *logUpdate = [NSString stringWithFormat:@"%lu media file references found after scanning %@", (unsigned long)[referencedMediaFiles count], [folderToScan lastPathComponent]];
     [self appendStringToLogFile:logUpdate];
     
-    /*
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert setMessageText:[NSString stringWithFormat:@"%@ Scan Complete.", [folderToScan lastPathComponent]]];
-        [alert setInformativeText:[NSString stringWithFormat:@"So far, found %lu references to media files.\nSee console output for list.", (unsigned long)[referencedMediaFiles count]]];
-        [alert addButtonWithTitle:@"OK"];
-        //[alert beginSheetModalForWindow:self.view.window completionHandler:nil];
-    });
-    */
-
 }
 
 
 - (void) appendStringToLogFile:(NSString *)logString {
     
-    // Call these on main thread (in case loggin is request from background thread)
+    // Call these on main thread in case logging is requested from background thread (prob not needed - but just incase)
     dispatch_async(dispatch_get_main_queue(), ^{
         // Ensure we are appending to end of log file
         [logFileHandle seekToEndOfFile];
