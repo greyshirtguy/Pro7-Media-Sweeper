@@ -5,7 +5,7 @@
 This app is in early development stage - It is a working beta that is now ready to test.
 Until this app has been tested more and made into a non-beta release, consider making a BACKUP COPY of any media folders before scanning them to remove unreferenced media files.
   
-###Backstory:
+### Backstory:
 This is a port of a Windows version by Arlin Sandbulte.  His version was a user-friendly AHK script.
 I offerred to make an AppleScript port and failed (miserably)!
 So in order to honour my original offer (in some way), I made this as a native MacOS app with Appkit/Storyboards/Objective-C
