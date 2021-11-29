@@ -25,16 +25,17 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
 
     // Look up Pro7 preferences to find support files folder (which is called "applicationShowDirectory")
     NSUserDefaults* settings = [[NSUserDefaults alloc] initWithSuiteName:@"com.renewedvision.propresenter"];
+    NSString *appShowDir = [[settings stringForKey:@"applicationShowDirectory"] stringByExpandingTildeInPath];
     
-    // Update UI to show Pro7 config was found (Icon turns bright orange and sweep button is enabled and it'stext is updated
-    if ([[settings stringForKey:@"applicationShowDirectory"] stringByExpandingTildeInPath]) {
+    // Update UI to show Pro7 config was found (Icon turns bright orange and sweep button is enabled and it's text is updated) - Otherwise nothing user can do - perhaps Pro7 is not installed?
+    if (appShowDir) {
         [self.iconImageView setImage:[NSImage imageNamed:@"Icon"]];
         [self.sweepButton setTitle:@"Sweep Unreferenced Media Files"];
         [self.sweepButton setEnabled:YES];
     }
     
-    // Create NSURL to point at Pro7 Support Folder (converting any invalid chars like & to std percent encoding used by URLs - just in case library folder contains such chars)
-    pro7SupportFolderURL = [NSURL URLWithString:[[[settings stringForKey:@"applicationShowDirectory"] stringByExpandingTildeInPath] stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
+    // Create NSURL to point at Pro7 Support Folder - converting any invalid chars (eg "&") to standard (%) encoded forms used by URLs - just in case library folder contains such chars.
+    pro7SupportFolderURL = [NSURL URLWithString:[[appShowDir stringByExpandingTildeInPath] stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
     
     // Set default media folder to scan to [Pro7SupportFolder]/Media
     [self.mediaFolderTextField setStringValue:[[[pro7SupportFolderURL path] stringByExpandingTildeInPath] stringByAppendingString:@"/Media"]];
