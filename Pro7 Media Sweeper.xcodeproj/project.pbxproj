@@ -301,7 +301,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Pro7 Media Sweeper/Pro7_Media_Sweeper.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "Beta 3";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -311,7 +311,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.9;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.greyshirtguy.Pro7-Media-Sweeper";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -328,7 +328,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Pro7 Media Sweeper/Pro7_Media_Sweeper.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "Beta 3";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -338,7 +338,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.greyshirtguy.Pro7-Media-Sweeper";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
