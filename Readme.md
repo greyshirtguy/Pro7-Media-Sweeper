@@ -16,9 +16,10 @@ Until this app has been tested some more and made into a non-beta release, consi
   
 ### Backstory:
 This is a port of a Windows version by Arlin Sandbulte.  His version is a user-friendly AutoHotKey script.
-I offerred to make an AppleScript port and failed (miserably)!  So in order to honour my original offer (in some way), I made this as a native MacOS app with Appkit/Storyboards/Objective-C
+I offered to make an AppleScript port and failed (miserably)!  So in order to somewhat honour my original offer, I made a native MacOS App (Appkit/Storyboards/Objective-C)
 
-*Ideally if this MacOS port was done with a nice friendly scripting language it might be easier for others to understand and contribute to - but I wanted to get this done in as little spare time as possible so I used old ways that were most comfortable for me.  Feel free to re-write in AppleScript, JavaSript, Python etc.*
+*Ideally if this MacOS port was done with a nice friendly scripting language it might be easier for others to understand and contribute to - but I wanted to get this done my spare time as quick as possible.
+So I used my "old ways" that were most comfortable for me.  Feel free to re-write in AppleScript, JavaSript, Python etc.*
 
 
 ### TODO:
