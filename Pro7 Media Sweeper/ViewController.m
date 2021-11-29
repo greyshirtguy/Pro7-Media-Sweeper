@@ -14,6 +14,7 @@
 NSURL *sweeperAppFolder;
 NSURL *sweeperSweptMediaFolder;
 NSURL *sweeperResultsFile;
+NSURL *pro7SupportFolderURL;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -21,13 +22,18 @@ NSURL *sweeperResultsFile;
     // Look up Pro7 preferences to find support files folder (which is called "applicationShowDirectory")
     NSUserDefaults* settings = [[NSUserDefaults alloc] initWithSuiteName:@"com.renewedvision.propresenter"];
     
-    //TODO: consider notifying user of any error reading Pro7 prefs
+    // Update UI to show Pro7 config was found (Icon turns bright orange and sweep button is enabled and it'stext is updated
+    if ([[settings stringForKey:@"applicationShowDirectory"] stringByExpandingTildeInPath]) {
+        [self.iconImageView setImage:[NSImage imageNamed:@"Icon"]];
+        [self.sweepButton setTitle:@"Sweep Unreferenced Media Files"];
+        [self.sweepButton setEnabled:YES];
+    }
     
-    // Display support files folder (resolve any Tilde prefix if present, to show full path)
-    [self.supportFilesTextField setStringValue:[[settings stringForKey:@"applicationShowDirectory"] stringByExpandingTildeInPath]];
+    // Create NSURL to point at Pro7 Support Folder (converting any invalid chars like & to std percent encoding used by URLs - just in case library folder contains such chars)
+    pro7SupportFolderURL = [NSURL URLWithString:[[[settings stringForKey:@"applicationShowDirectory"] stringByExpandingTildeInPath] stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
     
-    // Start with Pro7 default media folder for "Media Folder To Sweep" (resolve any Tilde prefix if present, to show full path)
-    [self.mediaFolderTextField setStringValue:[[[settings stringForKey:@"applicationShowDirectory"] stringByExpandingTildeInPath] stringByAppendingString:@"/Media"]];
+    // Set default media folder to scan to [Pro7SupportFolder]/Media
+    [self.mediaFolderTextField setStringValue:[[[pro7SupportFolderURL path] stringByExpandingTildeInPath] stringByAppendingString:@"/Media"]];
     
     // Update class variables that hold locations of folders to store swept files (and results file) - Created in User Home Folder
     NSFileManager *localFileManager= [[NSFileManager alloc] init];
@@ -35,6 +41,9 @@ NSURL *sweeperResultsFile;
     sweeperAppFolder = [userHomeFolder URLByAppendingPathComponent:@"Pro7 Media Sweeper"];
     sweeperSweptMediaFolder = [sweeperAppFolder URLByAppendingPathComponent:@"Swept Media Files"];
     sweeperResultsFile = [sweeperAppFolder URLByAppendingPathComponent:@"Sweeper Results.txt"];
+    
+    // Display swept files folder (resolve any Tilde prefix if present, to show full path)
+    [self.sweptFilesFolderTextField setStringValue:[[sweeperSweptMediaFolder path] stringByExpandingTildeInPath]];
 }
 
 - (void) viewDidAppear {
@@ -82,10 +91,7 @@ NSURL *sweeperResultsFile;
 
 - (IBAction)sweepButtonClicked:(NSButton *)sender {
     // TODO: Should we check if Pro7 is running - is there any chance of negative impact of opening/reading all library documents etc while Pro7 is open?
-    
-    // Create NSURL to point at Pro7 Support Folder (converting any invalid chars like & to std percent encoding used by URLs - just in case library folder contains such chars)
-    NSURL *pro7SupportFolderURL = [NSURL URLWithString:[[self.supportFilesTextField stringValue] stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
-    
+        
     // Create NSURL to point to selected Media Folder (Expand any ~ in the given path, and convert any invalid chars like & to std percent encoding used by URLs - just in case library folder contains such chars)
     NSURL *mediaFolderToScanURL = [NSURL URLWithString:[[[self.mediaFolderTextField stringValue] stringByExpandingTildeInPath] stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet]];
     
@@ -134,6 +140,10 @@ NSURL *sweeperResultsFile;
     });
 }
 
+- (IBAction)sweptMediaFolderLinkClicked:(id)sender {
+    // Open Finder to folder with swept media files
+    [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[sweeperSweptMediaFolder]];
+}
 
 - (void)scanMediaFolder:(NSURL *)mediaFolderToScanURL includingSubFolders:(BOOL)includeSubFolders forMediaNotUsedByPro7SupportFiles:(NSURL *)pro7SupportFolderURL {
     // ***************************************************************************************************************************************

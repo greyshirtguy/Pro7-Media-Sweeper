@@ -369,8 +369,8 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PmA-h7-Yt1">
-                                <rect key="frame" x="16" y="35" width="87" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Support Files:" id="Mrf-bG-jUO">
+                                <rect key="frame" x="16" y="34" width="157" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Swept Media Files Folder:" id="Mrf-bG-jUO">
                                     <font key="font" metaFont="systemLight" size="13"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -384,11 +384,11 @@
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hOq-Jr-gOV">
-                                <rect key="frame" x="335" y="8" width="314" height="32"/>
+                                <rect key="frame" x="385" y="8" width="264" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="cSJ-fa-VgQ"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="cSJ-fa-VgQ"/>
                                 </constraints>
-                                <buttonCell key="cell" type="push" title="Sweep Unreferenced Media Files" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" id="s3J-Zw-6XI">
+                                <buttonCell key="cell" type="push" title="Pro7 Config Not Found" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="border" inset="2" id="s3J-Zw-6XI">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -397,13 +397,16 @@
                                     <action selector="sweepButtonClicked:" target="XfG-lQ-9wD" id="eij-ya-0WB"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vVy-4F-2he">
-                                <rect key="frame" x="16" y="15" width="194" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Unable to read Pro7 preferences" id="jv3-Xf-cD9">
-                                    <font key="font" metaFont="systemUltraLight" size="13"/>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vVy-4F-2he" customClass="P7MSClickableTextField">
+                                <rect key="frame" x="16" y="15" width="130" height="15"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="~/Pro7 Media Sweeper" id="jv3-Xf-cD9">
+                                    <font key="font" metaFont="systemLight" size="12"/>
+                                    <color key="textColor" name="linkColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="sweptMediaFolderLinkClicked:" target="XfG-lQ-9wD" id="FG2-TI-Xn4"/>
+                                </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N1A-ag-4Bx">
                                 <rect key="frame" x="601" y="100" width="48" height="32"/>
@@ -419,7 +422,7 @@
                                 </connections>
                             </button>
                             <progressIndicator maxValue="100" doubleValue="50" displayedWhenStopped="NO" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="drV-7U-bah">
-                                <rect key="frame" x="342" y="-9" width="300" height="34"/>
+                                <rect key="frame" x="392" y="-9" width="250" height="34"/>
                             </progressIndicator>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ucH-8d-JAN">
                                 <rect key="frame" x="15" y="105" width="52" height="52"/>
@@ -427,7 +430,7 @@
                                     <constraint firstAttribute="width" constant="52" id="VKB-fL-KDu"/>
                                     <constraint firstAttribute="height" constant="52" id="Yif-2F-9YA"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="Icon" id="rkw-9O-P5y"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="IconBW" id="rkw-9O-P5y"/>
                             </imageView>
                         </subviews>
                         <constraints>
@@ -455,16 +458,17 @@
                             <constraint firstAttribute="trailing" secondItem="N1A-ag-4Bx" secondAttribute="trailing" constant="16" id="hrP-40-gJC"/>
                             <constraint firstItem="PmA-h7-Yt1" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="18" id="n8A-gl-PDb"/>
                             <constraint firstItem="vVy-4F-2he" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="18" id="uAm-PT-C7l"/>
-                            <constraint firstAttribute="bottom" secondItem="PmA-h7-Yt1" secondAttribute="bottom" constant="35" id="wy7-AH-3LC"/>
+                            <constraint firstAttribute="bottom" secondItem="PmA-h7-Yt1" secondAttribute="bottom" constant="34" id="wy7-AH-3LC"/>
                             <constraint firstItem="hyi-YE-dGk" firstAttribute="top" secondItem="PHt-lz-f7P" secondAttribute="bottom" constant="15" id="zPG-Ye-odV"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="iconImageView" destination="ucH-8d-JAN" id="3me-98-cba"/>
                         <outlet property="includeSubfoldersButton" destination="hyi-YE-dGk" id="LQf-0O-doJ"/>
                         <outlet property="mediaFolderTextField" destination="PHt-lz-f7P" id="mjk-C8-K89"/>
                         <outlet property="progressIndicator" destination="drV-7U-bah" id="cuO-pi-v4F"/>
-                        <outlet property="supportFilesTextField" destination="vVy-4F-2he" id="IT8-YW-rUd"/>
                         <outlet property="sweepButton" destination="hOq-Jr-gOV" id="4eA-Gs-oLa"/>
+                        <outlet property="sweptFilesFolderTextField" destination="vVy-4F-2he" id="IT8-YW-rUd"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -473,7 +477,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Icon" width="42" height="42"/>
+        <image name="IconBW" width="56" height="56"/>
         <image name="search" width="32" height="32"/>
     </resources>
 </document>

@@ -14,6 +14,8 @@
 		37845839274BA52E00BE4635 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37845837274BA52E00BE4635 /* Main.storyboard */; };
 		3784583B274BA52E00BE4635 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3784583A274BA52E00BE4635 /* main.m */; };
 		37BC0F5E27539B19003061D1 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BC0F5D27539B19003061D1 /* search.png */; };
+		37BC0F6227543B14003061D1 /* IconBW.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BC0F6127543B14003061D1 /* IconBW.png */; };
+		37BC0F6527544A89003061D1 /* P7MSClickableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BC0F6427544A89003061D1 /* P7MSClickableTextField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,9 @@
 		37845843274BA8C900BE4635 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		37A7A82B274FC7EB008CAB53 /* Sweeper Icon.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Sweeper Icon.svg"; sourceTree = "<group>"; };
 		37BC0F5D27539B19003061D1 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
+		37BC0F6127543B14003061D1 /* IconBW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconBW.png; sourceTree = "<group>"; };
+		37BC0F6327544A89003061D1 /* P7MSClickableTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = P7MSClickableTextField.h; sourceTree = "<group>"; };
+		37BC0F6427544A89003061D1 /* P7MSClickableTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = P7MSClickableTextField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +56,7 @@
 				372DEDD1274BDCD500F8A4F8 /* ScreenShot.png */,
 				37A7A82B274FC7EB008CAB53 /* Sweeper Icon.svg */,
 				376893D82751A41D00AD35AD /* Icon.png */,
+				37BC0F6127543B14003061D1 /* IconBW.png */,
 				37BC0F5D27539B19003061D1 /* search.png */,
 				3784582E274BA52E00BE4635 /* Pro7 Media Sweeper */,
 				3784582D274BA52E00BE4635 /* Products */,
@@ -74,6 +80,8 @@
 				37845833274BA52E00BE4635 /* ViewController.m */,
 				37845835274BA52E00BE4635 /* Assets.xcassets */,
 				37845837274BA52E00BE4635 /* Main.storyboard */,
+				37BC0F6327544A89003061D1 /* P7MSClickableTextField.h */,
+				37BC0F6427544A89003061D1 /* P7MSClickableTextField.m */,
 				3784583A274BA52E00BE4635 /* main.m */,
 				3784583C274BA52E00BE4635 /* Pro7_Media_Sweeper.entitlements */,
 			);
@@ -140,6 +148,7 @@
 				37BC0F5E27539B19003061D1 /* search.png in Resources */,
 				376893D92752544200AD35AD /* Icon.png in Resources */,
 				37845836274BA52E00BE4635 /* Assets.xcassets in Resources */,
+				37BC0F6227543B14003061D1 /* IconBW.png in Resources */,
 				37845839274BA52E00BE4635 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -152,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37845834274BA52E00BE4635 /* ViewController.m in Sources */,
+				37BC0F6527544A89003061D1 /* P7MSClickableTextField.m in Sources */,
 				3784583B274BA52E00BE4635 /* main.m in Sources */,
 				37845831274BA52E00BE4635 /* AppDelegate.m in Sources */,
 			);

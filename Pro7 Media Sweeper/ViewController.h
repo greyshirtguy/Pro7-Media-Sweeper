@@ -10,10 +10,11 @@
 @interface ViewController : NSViewController
 
 @property (weak) IBOutlet NSTextField *mediaFolderTextField;
-@property (weak) IBOutlet NSTextField *supportFilesTextField;
+@property (weak) IBOutlet NSTextField *sweptFilesFolderTextField;
 @property (weak) IBOutlet NSButton *includeSubfoldersButton;
 @property (weak) IBOutlet NSButton *sweepButton;
 @property (weak) IBOutlet NSProgressIndicator *progressIndicator;
+@property (weak) IBOutlet NSImageView *iconImageView;
 
 @end
 
