@@ -4,10 +4,11 @@
 
 ### What does it do?
 It scans all your Pro7 documents in all libraries and then scans your playlists, props and themes for any references/links to media files - building a list of every media file used by your current Pro7 setup.
-It then scans any media folder you select to find any media files that are NOT used in your current Pro7 setup (not used in any docs, playlists, props, stage displays, themes etc).
-Any files are are nto being "used" by your Pro7 setup are moved to "Swept Media Files" folder in your home folder.
-You can archive those un-used media files to other storage to save disk space.
-(Tip: If you choose to delete the un-used media files, be careful to review them first. Perhaps don't delete them right away and wait "a while!" to avoid any future deletion regrets! )
+It then scans the "Media Folder To Sweep" that you selected to find any media files in there that are NOT used in your current Pro7 setup. ie. Not used in any docs, playlists, props, stage displays, themes etc.
+During the scan, any files that are not being "used" by your Pro7 setup are moved to "Swept Media Files" folder in your home folder - So that you now have a single folder containing all media files NOT used by Pro7.
+You can then archive those un-used media files to other storage to save disk space.
+
+Tip: If you choose to delete the un-used media files, be careful to review them first. Perhaps don't delete them right away and wait "a while!" to avoid any future deletion regrets!
 
 This app is in early development stage - It is a working BETA that is now ready to TEST.
 Until this app has been tested some more and made into a non-beta release, consider making a BACKUP COPY of any media folders you choose to scan - before scanning them!!
