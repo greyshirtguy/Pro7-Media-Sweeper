@@ -21,7 +21,7 @@ This is a port of a Windows version by Arlin Sandbulte.  His version is a user-f
 I offered to make an AppleScript port and failed (miserably)!  So in order to somewhat honour my original offer, I made a native MacOS App (Appkit/Storyboards/Objective-C)
 
 *Ideally if this MacOS port was done with a nice friendly scripting language it might be easier for others to understand and contribute to - but I wanted to get this done in my spare time as quick as possible.
-So after failing to learn enough AppleSCript to port Arlin's AHK script, I fell-back onto my "old ways" and made a native Mac App. All logic is in the ViewController (Yes, I used the "Giant ViewController" noob design pattern for this "tiny" app!) Feel free to re-write in AppleScript, JavaSript, Python etc.*
+So after failing to learn enough AppleScript to port Arlin's AHK script, I fell-back onto my "old ways" and made a native Mac App. All logic is in the ViewController (Yes, I used the "Giant ViewController" noob design pattern for this "tiny" app!) Feel free to re-write in AppleScript, JavaSript, Python etc.*
 
 
 ### TODO:
