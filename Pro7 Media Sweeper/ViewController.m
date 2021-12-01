@@ -128,8 +128,10 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
         [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
         [sweepResultsFileHandle truncateFileAtOffset:0]; // Start at begining to overwrite results file...
         
-        // Update Log File
-        [self appendStringToLogFile:[NSString  stringWithFormat: @"***************************************************************\nMedia Sweep Started: %@\n***************************************************************\n", [dateFormatter stringFromDate:[NSDate date]]]];
+        // New scan started - Add entry in Log File
+        [self appendStringToLogFile:[NSString  stringWithFormat: @"\n\n***************************************************************\nMedia Sweep Started: %@\n***************************************************************", [dateFormatter stringFromDate:[NSDate date]]]];
+        NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        [self appendStringToLogFile:[NSString  stringWithFormat:@"App Version: %@", appVersion]];
         
         // Call function to scan folders
         [self scanMediaFolder:mediaFolderToScanURL includingSubFolders:includeSubFolders forMediaNotUsedByPro7SupportFiles:pro7SupportFolderURL];
@@ -184,7 +186,7 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
     
     // For Pro7 files created on MacOS, relative path starts with a non-ascii char (byte 0x12), then has any number of any chars followed by a . and then any number of alpha-numeric chars and is ended by two non-ascii chars (bytes 0x1a 0x06)
     // For Pro7 files created on Windows, the above pattern also matches relative paths! (Which is all you need to match - as only relative Windows paths could refer to media files on a MacOS file system)
-    NSString *patternRelativeMediaPath = [NSString stringWithFormat:@"(?<=%c.).*\\.([0-9]|[a-z]|[A-Z])*(?=%c%c)", 0x12,0x1A,0x06];
+    NSString *patternRelativeMediaPath = [NSString stringWithFormat:@"(?<=%c.).*\\.([0-9]|[a-z]|[A-Z])*(?=%c)", 0x12,0x1A];
     
     // Enumerate the entire contents of Libraries folder (and sub folders) and then read each .pro file and add all found references to referencedMediaFiles array (using simple REGEX matching)
     NSURL *librariesFolderURL = [pro7SupportFolderURL URLByAppendingPathComponent:@"Libraries"];
@@ -270,8 +272,8 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
         // Find (index of) first item is array of referenced media files that matches the current media file.
         NSUInteger index = [referencedMediaFiles indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
             // Finding matches in the array is done by checking if the full path of the media file *contains* the media reference path stored in the array (this block searches the array items one by one)
-            // This method of checking for a match works for both relative and absolute paths
-            if ([[mediaFileURL path] containsString:(NSString *)obj]) {
+            // Relative paths are stored without URL encoding and absolute paths are stored WITH URL encoding - so we need to check for both cases...
+            if ( [[mediaFileURL path] containsString:(NSString *)obj] || [mediaFileURL isEqual:[NSURL URLWithString:(NSString *)obj]] ) {
                 *stop = YES;
                 return YES;
             }
@@ -383,8 +385,6 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
             // Create NSString from the data - This allows the unconventional use of REGEX to find patterns in the string form of the data. (Making sure to force a specific string encoding to an 8 bit encoding).
             NSString *proFileString = [[NSString alloc] initWithData:proFileData encoding:NSISOLatin1StringEncoding];
             
-            //NSLog(@"Name: %@\n  Data Length:%lu\nString Length:%lu",[fileURL lastPathComponent],(unsigned long)[proFileData length],(unsigned long)[proFileString length]);
-            
             // For debugging purposes - Log any mismatch of reading file as NSData vs NSString
             if ([proFileData length] != [proFileString length]) {
                 [self appendStringToLogFile:[NSString stringWithFormat:@"Warning: File data/string size mismatch for %@", [fileURL path]]];
@@ -404,22 +404,23 @@ NSFileHandle *logFileHandle; // Writeable handle to log file
                     
                     // Add to list of media files
                     if (pathToMediaFile) {
-                        
                         // Sometimes (not often) I've noticed an extra non-ascii char at start of relative paths returned when using the current REGEX pattern.
                         // Ideally I would update the REGEX to remove it when it occurs - but I could not figure out how to create a REGEX for positive lookbehind that swallows optional chars...
                         // So I'll just nibble off any low-byte char if found at the start.
                         if ((int)[pathToMediaFile characterAtIndex:0] < 32)
                             pathToMediaFile = [pathToMediaFile substringFromIndex:1];
                         
+                        // Capture the matched string (should be a reference to a file!)
                         [referencedMediaFiles addObject:pathToMediaFile];
-                        //[referencedMediaFiles addObject:[pathToMediaFile stringByAppendingString:[fileURL path]]]; // Debugging option to capture filename
+                        
+                        // Add the match to log file for support/debugging!
+                        [self appendStringToLogFile:[NSString stringWithFormat:@"Reference: %@ found in file %@", pathToMediaFile, fileURL]];
                     } else {
+                        // Log any errors encountered when trying extract matched substring from the file string
                         [self appendStringToLogFile:[NSString stringWithFormat:@"Error extracting pathToMediaFile for match %@", match]];
                     }
                 }
             }
-            
-            
         }
     }
     NSString *logUpdate = [NSString stringWithFormat:@"%lu media file references found after scanning %@", (unsigned long)[referencedMediaFiles count], [folderToScan lastPathComponent]];
