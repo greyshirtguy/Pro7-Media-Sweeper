@@ -17,6 +17,55 @@
 		37BC0F5E27539B19003061D1 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BC0F5D27539B19003061D1 /* search.png */; };
 		37BC0F6227543B14003061D1 /* IconBW.png in Resources */ = {isa = PBXBuildFile; fileRef = 37BC0F6127543B14003061D1 /* IconBW.png */; };
 		37BC0F6527544A89003061D1 /* P7MSClickableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BC0F6427544A89003061D1 /* P7MSClickableTextField.m */; };
+		37DD734D276F42B90047FF31 /* Timers.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD72ED276F42B80047FF31 /* Timers.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD734E276F42B90047FF31 /* Propresenter.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD72EE276F42B80047FF31 /* Propresenter.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD734F276F42B90047FF31 /* Timestamp.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD72EF276F42B80047FF31 /* Timestamp.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7350276F42B90047FF31 /* Layers.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD72F2276F42B80047FF31 /* Layers.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7351276F42B90047FF31 /* Presentation.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD72F4276F42B80047FF31 /* Presentation.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7352276F42B90047FF31 /* ProCore.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD72F5276F42B80047FF31 /* ProCore.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7353276F42B90047FF31 /* ClearGroups.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD72F6276F42B80047FF31 /* ClearGroups.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7354276F42B90047FF31 /* Template.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD72F9276F42B80047FF31 /* Template.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7355276F42B90047FF31 /* Playlist.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD72FB276F42B80047FF31 /* Playlist.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7356276F42B90047FF31 /* Targets.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD72FC276F42B80047FF31 /* Targets.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7357276F42B90047FF31 /* Workspace.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7301276F42B80047FF31 /* Workspace.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7358276F42B90047FF31 /* Proworkspace.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7308276F42B80047FF31 /* Proworkspace.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7359276F42B90047FF31 /* Recording.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7309276F42B80047FF31 /* Recording.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD735A276F42B90047FF31 /* Cue.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD730A276F42B80047FF31 /* Cue.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD735B276F42B90047FF31 /* HotKey.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD730C276F42B80047FF31 /* HotKey.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD735C276F42B90047FF31 /* Calendar.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD730F276F42B80047FF31 /* Calendar.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD735D276F42B90047FF31 /* DmxProfiles.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7310276F42B80047FF31 /* DmxProfiles.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD735E276F42B90047FF31 /* PlanningCenter.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7314276F42B80047FF31 /* PlanningCenter.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD735F276F42B90047FF31 /* Library.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7315276F42B80047FF31 /* Library.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7360276F42B90047FF31 /* BaseDocument.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7316276F42B80047FF31 /* BaseDocument.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7361276F42B90047FF31 /* PropSlide.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7317276F42B80047FF31 /* PropSlide.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7362276F42B90047FF31 /* LiveVideoPlaylist.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7318276F42B80047FF31 /* LiveVideoPlaylist.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7363276F42B90047FF31 /* Proscreen.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7320276F42B80047FF31 /* Proscreen.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7364276F42B90047FF31 /* AlignmentGuide.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7321276F42B80047FF31 /* AlignmentGuide.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7365276F42B90047FF31 /* ProMask.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7322276F42B80047FF31 /* ProMask.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7366276F42B90047FF31 /* DigitalAudio.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7327276F42B80047FF31 /* DigitalAudio.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7367276F42B90047FF31 /* ProAudienceLook.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7328276F42B80047FF31 /* ProAudienceLook.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7368276F42B90047FF31 /* Messages.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7329276F42B80047FF31 /* Messages.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7369276F42B90047FF31 /* Groups.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD732A276F42B80047FF31 /* Groups.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD736A276F42B90047FF31 /* Labels.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD732B276F42B80047FF31 /* Labels.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD736B276F42B90047FF31 /* Screens.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD732D276F42B80047FF31 /* Screens.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD736C276F42B90047FF31 /* Macros.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7330276F42B80047FF31 /* Macros.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD736D276F42B90047FF31 /* TestPattern.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7331276F42B80047FF31 /* TestPattern.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD736E276F42B90047FF31 /* Keymapping.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7334276F42B80047FF31 /* Keymapping.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD736F276F42B90047FF31 /* GraphicsData.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7335276F42B80047FF31 /* GraphicsData.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7370276F42B90047FF31 /* Stage.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7337276F42B80047FF31 /* Stage.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7371276F42B90047FF31 /* Input.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD733A276F42B80047FF31 /* Input.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7372276F42B90047FF31 /* Effects.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD733C276F42B80047FF31 /* Effects.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7373276F42B90047FF31 /* BasicTypes.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD733E276F42B80047FF31 /* BasicTypes.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7374276F42B90047FF31 /* PresentationSlide.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD733F276F42B80047FF31 /* PresentationSlide.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7375276F42B90047FF31 /* PropDocument.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7340276F42B80047FF31 /* PropDocument.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7376276F42B90047FF31 /* Slide.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7341276F42B80047FF31 /* Slide.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7377276F42B90047FF31 /* Audio.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7342276F42B80047FF31 /* Audio.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7378276F42B90047FF31 /* Action.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7343276F42B80047FF31 /* Action.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD7379276F42B90047FF31 /* Masks.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7344276F42B80047FF31 /* Masks.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD737A276F42B90047FF31 /* ProApi.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD7345276F42B80047FF31 /* ProApi.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD737B276F42B90047FF31 /* Ccli.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD734B276F42B80047FF31 /* Ccli.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD737C276F42B90047FF31 /* Background.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD734C276F42B80047FF31 /* Background.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		37DD73A5277098EE0047FF31 /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37DD73A4277098EE0047FF31 /* libProtocolBuffers.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +87,141 @@
 		37BC0F6127543B14003061D1 /* IconBW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconBW.png; sourceTree = "<group>"; };
 		37BC0F6327544A89003061D1 /* P7MSClickableTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = P7MSClickableTextField.h; sourceTree = "<group>"; };
 		37BC0F6427544A89003061D1 /* P7MSClickableTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = P7MSClickableTextField.m; sourceTree = "<group>"; };
+		37DD72ED276F42B80047FF31 /* Timers.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timers.pbobjc.m; sourceTree = "<group>"; };
+		37DD72EE276F42B80047FF31 /* Propresenter.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Propresenter.pbobjc.m; sourceTree = "<group>"; };
+		37DD72EF276F42B80047FF31 /* Timestamp.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timestamp.pbobjc.m; sourceTree = "<group>"; };
+		37DD72F0276F42B80047FF31 /* AlignmentGuide.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlignmentGuide.pbobjc.h; sourceTree = "<group>"; };
+		37DD72F1276F42B80047FF31 /* ProMask.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProMask.pbobjc.h; sourceTree = "<group>"; };
+		37DD72F2276F42B80047FF31 /* Layers.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Layers.pbobjc.m; sourceTree = "<group>"; };
+		37DD72F3276F42B80047FF31 /* Proscreen.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Proscreen.pbobjc.h; sourceTree = "<group>"; };
+		37DD72F4276F42B80047FF31 /* Presentation.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Presentation.pbobjc.m; sourceTree = "<group>"; };
+		37DD72F5276F42B80047FF31 /* ProCore.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProCore.pbobjc.m; sourceTree = "<group>"; };
+		37DD72F6276F42B80047FF31 /* ClearGroups.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearGroups.pbobjc.m; sourceTree = "<group>"; };
+		37DD72F7276F42B80047FF31 /* TestPattern.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPattern.pbobjc.h; sourceTree = "<group>"; };
+		37DD72F8276F42B80047FF31 /* Macros.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.pbobjc.h; sourceTree = "<group>"; };
+		37DD72F9276F42B80047FF31 /* Template.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Template.pbobjc.m; sourceTree = "<group>"; };
+		37DD72FA276F42B80047FF31 /* Screens.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screens.pbobjc.h; sourceTree = "<group>"; };
+		37DD72FB276F42B80047FF31 /* Playlist.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Playlist.pbobjc.m; sourceTree = "<group>"; };
+		37DD72FC276F42B80047FF31 /* Targets.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Targets.pbobjc.m; sourceTree = "<group>"; };
+		37DD72FD276F42B80047FF31 /* Labels.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Labels.pbobjc.h; sourceTree = "<group>"; };
+		37DD72FE276F42B80047FF31 /* Groups.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Groups.pbobjc.h; sourceTree = "<group>"; };
+		37DD72FF276F42B80047FF31 /* Messages.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.pbobjc.h; sourceTree = "<group>"; };
+		37DD7300276F42B80047FF31 /* ProAudienceLook.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProAudienceLook.pbobjc.h; sourceTree = "<group>"; };
+		37DD7301276F42B80047FF31 /* Workspace.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Workspace.pbobjc.m; sourceTree = "<group>"; };
+		37DD7302276F42B80047FF31 /* DigitalAudio.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitalAudio.pbobjc.h; sourceTree = "<group>"; };
+		37DD7303276F42B80047FF31 /* PresentationSlide.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationSlide.pbobjc.h; sourceTree = "<group>"; };
+		37DD7304276F42B80047FF31 /* PropDocument.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropDocument.pbobjc.h; sourceTree = "<group>"; };
+		37DD7305276F42B80047FF31 /* Slide.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slide.pbobjc.h; sourceTree = "<group>"; };
+		37DD7306276F42B80047FF31 /* BasicTypes.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTypes.pbobjc.h; sourceTree = "<group>"; };
+		37DD7307276F42B80047FF31 /* Effects.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effects.pbobjc.h; sourceTree = "<group>"; };
+		37DD7308276F42B80047FF31 /* Proworkspace.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Proworkspace.pbobjc.m; sourceTree = "<group>"; };
+		37DD7309276F42B80047FF31 /* Recording.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recording.pbobjc.m; sourceTree = "<group>"; };
+		37DD730A276F42B80047FF31 /* Cue.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cue.pbobjc.m; sourceTree = "<group>"; };
+		37DD730B276F42B80047FF31 /* Input.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Input.pbobjc.h; sourceTree = "<group>"; };
+		37DD730C276F42B80047FF31 /* HotKey.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotKey.pbobjc.m; sourceTree = "<group>"; };
+		37DD730D276F42B80047FF31 /* Stage.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stage.pbobjc.h; sourceTree = "<group>"; };
+		37DD730E276F42B80047FF31 /* GraphicsData.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicsData.pbobjc.h; sourceTree = "<group>"; };
+		37DD730F276F42B80047FF31 /* Calendar.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Calendar.pbobjc.m; sourceTree = "<group>"; };
+		37DD7310276F42B80047FF31 /* DmxProfiles.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DmxProfiles.pbobjc.m; sourceTree = "<group>"; };
+		37DD7311276F42B80047FF31 /* Keymapping.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keymapping.pbobjc.h; sourceTree = "<group>"; };
+		37DD7312276F42B80047FF31 /* Background.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Background.pbobjc.h; sourceTree = "<group>"; };
+		37DD7313276F42B80047FF31 /* Ccli.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ccli.pbobjc.h; sourceTree = "<group>"; };
+		37DD7314276F42B80047FF31 /* PlanningCenter.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanningCenter.pbobjc.m; sourceTree = "<group>"; };
+		37DD7315276F42B80047FF31 /* Library.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Library.pbobjc.m; sourceTree = "<group>"; };
+		37DD7316276F42B80047FF31 /* BaseDocument.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseDocument.pbobjc.m; sourceTree = "<group>"; };
+		37DD7317276F42B80047FF31 /* PropSlide.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropSlide.pbobjc.m; sourceTree = "<group>"; };
+		37DD7318276F42B80047FF31 /* LiveVideoPlaylist.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveVideoPlaylist.pbobjc.m; sourceTree = "<group>"; };
+		37DD7319276F42B80047FF31 /* Action.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.pbobjc.h; sourceTree = "<group>"; };
+		37DD731A276F42B80047FF31 /* ProApi.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProApi.pbobjc.h; sourceTree = "<group>"; };
+		37DD731B276F42B80047FF31 /* Masks.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Masks.pbobjc.h; sourceTree = "<group>"; };
+		37DD731C276F42B80047FF31 /* Audio.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.pbobjc.h; sourceTree = "<group>"; };
+		37DD731D276F42B80047FF31 /* ProCore.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProCore.pbobjc.h; sourceTree = "<group>"; };
+		37DD731E276F42B80047FF31 /* Layers.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layers.pbobjc.h; sourceTree = "<group>"; };
+		37DD731F276F42B80047FF31 /* Presentation.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Presentation.pbobjc.h; sourceTree = "<group>"; };
+		37DD7320276F42B80047FF31 /* Proscreen.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Proscreen.pbobjc.m; sourceTree = "<group>"; };
+		37DD7321276F42B80047FF31 /* AlignmentGuide.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlignmentGuide.pbobjc.m; sourceTree = "<group>"; };
+		37DD7322276F42B80047FF31 /* ProMask.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProMask.pbobjc.m; sourceTree = "<group>"; };
+		37DD7323276F42B80047FF31 /* Timestamp.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timestamp.pbobjc.h; sourceTree = "<group>"; };
+		37DD7324276F42B80047FF31 /* Propresenter.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Propresenter.pbobjc.h; sourceTree = "<group>"; };
+		37DD7325276F42B80047FF31 /* Timers.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timers.pbobjc.h; sourceTree = "<group>"; };
+		37DD7326276F42B80047FF31 /* Workspace.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Workspace.pbobjc.h; sourceTree = "<group>"; };
+		37DD7327276F42B80047FF31 /* DigitalAudio.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DigitalAudio.pbobjc.m; sourceTree = "<group>"; };
+		37DD7328276F42B80047FF31 /* ProAudienceLook.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProAudienceLook.pbobjc.m; sourceTree = "<group>"; };
+		37DD7329276F42B80047FF31 /* Messages.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Messages.pbobjc.m; sourceTree = "<group>"; };
+		37DD732A276F42B80047FF31 /* Groups.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Groups.pbobjc.m; sourceTree = "<group>"; };
+		37DD732B276F42B80047FF31 /* Labels.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Labels.pbobjc.m; sourceTree = "<group>"; };
+		37DD732C276F42B80047FF31 /* Targets.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Targets.pbobjc.h; sourceTree = "<group>"; };
+		37DD732D276F42B80047FF31 /* Screens.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Screens.pbobjc.m; sourceTree = "<group>"; };
+		37DD732E276F42B80047FF31 /* Playlist.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Playlist.pbobjc.h; sourceTree = "<group>"; };
+		37DD732F276F42B80047FF31 /* Template.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Template.pbobjc.h; sourceTree = "<group>"; };
+		37DD7330276F42B80047FF31 /* Macros.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Macros.pbobjc.m; sourceTree = "<group>"; };
+		37DD7331276F42B80047FF31 /* TestPattern.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPattern.pbobjc.m; sourceTree = "<group>"; };
+		37DD7332276F42B80047FF31 /* ClearGroups.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearGroups.pbobjc.h; sourceTree = "<group>"; };
+		37DD7333276F42B80047FF31 /* DmxProfiles.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DmxProfiles.pbobjc.h; sourceTree = "<group>"; };
+		37DD7334276F42B80047FF31 /* Keymapping.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keymapping.pbobjc.m; sourceTree = "<group>"; };
+		37DD7335276F42B80047FF31 /* GraphicsData.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphicsData.pbobjc.m; sourceTree = "<group>"; };
+		37DD7336276F42B80047FF31 /* Calendar.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calendar.pbobjc.h; sourceTree = "<group>"; };
+		37DD7337276F42B80047FF31 /* Stage.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stage.pbobjc.m; sourceTree = "<group>"; };
+		37DD7338276F42B80047FF31 /* HotKey.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotKey.pbobjc.h; sourceTree = "<group>"; };
+		37DD7339276F42B80047FF31 /* Cue.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cue.pbobjc.h; sourceTree = "<group>"; };
+		37DD733A276F42B80047FF31 /* Input.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Input.pbobjc.m; sourceTree = "<group>"; };
+		37DD733B276F42B80047FF31 /* Recording.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recording.pbobjc.h; sourceTree = "<group>"; };
+		37DD733C276F42B80047FF31 /* Effects.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Effects.pbobjc.m; sourceTree = "<group>"; };
+		37DD733D276F42B80047FF31 /* Proworkspace.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Proworkspace.pbobjc.h; sourceTree = "<group>"; };
+		37DD733E276F42B80047FF31 /* BasicTypes.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicTypes.pbobjc.m; sourceTree = "<group>"; };
+		37DD733F276F42B80047FF31 /* PresentationSlide.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentationSlide.pbobjc.m; sourceTree = "<group>"; };
+		37DD7340276F42B80047FF31 /* PropDocument.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropDocument.pbobjc.m; sourceTree = "<group>"; };
+		37DD7341276F42B80047FF31 /* Slide.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Slide.pbobjc.m; sourceTree = "<group>"; };
+		37DD7342276F42B80047FF31 /* Audio.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Audio.pbobjc.m; sourceTree = "<group>"; };
+		37DD7343276F42B80047FF31 /* Action.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Action.pbobjc.m; sourceTree = "<group>"; };
+		37DD7344276F42B80047FF31 /* Masks.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Masks.pbobjc.m; sourceTree = "<group>"; };
+		37DD7345276F42B80047FF31 /* ProApi.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProApi.pbobjc.m; sourceTree = "<group>"; };
+		37DD7346276F42B80047FF31 /* LiveVideoPlaylist.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveVideoPlaylist.pbobjc.h; sourceTree = "<group>"; };
+		37DD7347276F42B80047FF31 /* PropSlide.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropSlide.pbobjc.h; sourceTree = "<group>"; };
+		37DD7348276F42B80047FF31 /* PlanningCenter.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanningCenter.pbobjc.h; sourceTree = "<group>"; };
+		37DD7349276F42B80047FF31 /* Library.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.pbobjc.h; sourceTree = "<group>"; };
+		37DD734A276F42B80047FF31 /* BaseDocument.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseDocument.pbobjc.h; sourceTree = "<group>"; };
+		37DD734B276F42B80047FF31 /* Ccli.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ccli.pbobjc.m; sourceTree = "<group>"; };
+		37DD734C276F42B80047FF31 /* Background.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Background.pbobjc.m; sourceTree = "<group>"; };
+		37DD737E276F42C10047FF31 /* GPBCodedOutputStream_PackagePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBCodedOutputStream_PackagePrivate.h; sourceTree = "<group>"; };
+		37DD737F276F42C10047FF31 /* GPBArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBArray.h; sourceTree = "<group>"; };
+		37DD7380276F42C10047FF31 /* GPBAny.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBAny.pbobjc.h; sourceTree = "<group>"; };
+		37DD7381276F42C10047FF31 /* GPBProtocolBuffers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBProtocolBuffers.h; sourceTree = "<group>"; };
+		37DD7382276F42C10047FF31 /* GPBFieldMask.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBFieldMask.pbobjc.h; sourceTree = "<group>"; };
+		37DD7383276F42C10047FF31 /* GPBDuration.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBDuration.pbobjc.h; sourceTree = "<group>"; };
+		37DD7384276F42C10047FF31 /* GPBDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBDictionary.h; sourceTree = "<group>"; };
+		37DD7385276F42C10047FF31 /* GPBCodedOutputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBCodedOutputStream.h; sourceTree = "<group>"; };
+		37DD7386276F42C10047FF31 /* GPBRootObject_PackagePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBRootObject_PackagePrivate.h; sourceTree = "<group>"; };
+		37DD7387276F42C10047FF31 /* GPBUtilities_PackagePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBUtilities_PackagePrivate.h; sourceTree = "<group>"; };
+		37DD7388276F42C10047FF31 /* GPBWrappers.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBWrappers.pbobjc.h; sourceTree = "<group>"; };
+		37DD7389276F42C10047FF31 /* GPBDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBDescriptor.h; sourceTree = "<group>"; };
+		37DD738A276F42C10047FF31 /* GPBCodedInputStream_PackagePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBCodedInputStream_PackagePrivate.h; sourceTree = "<group>"; };
+		37DD738B276F42C10047FF31 /* GPBRootObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBRootObject.h; sourceTree = "<group>"; };
+		37DD738C276F42C10047FF31 /* GPBBootstrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBBootstrap.h; sourceTree = "<group>"; };
+		37DD738D276F42C10047FF31 /* GPBExtensionRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBExtensionRegistry.h; sourceTree = "<group>"; };
+		37DD738E276F42C10047FF31 /* GPBType.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBType.pbobjc.h; sourceTree = "<group>"; };
+		37DD738F276F42C10047FF31 /* GPBRuntimeTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBRuntimeTypes.h; sourceTree = "<group>"; };
+		37DD7390276F42C10047FF31 /* GPBUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBUtilities.h; sourceTree = "<group>"; };
+		37DD7391276F42C10047FF31 /* GPBMessage_PackagePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBMessage_PackagePrivate.h; sourceTree = "<group>"; };
+		37DD7392276F42C10047FF31 /* GPBWireFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBWireFormat.h; sourceTree = "<group>"; };
+		37DD7393276F42C10047FF31 /* GPBArray_PackagePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBArray_PackagePrivate.h; sourceTree = "<group>"; };
+		37DD7394276F42C10047FF31 /* GPBEmpty.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBEmpty.pbobjc.h; sourceTree = "<group>"; };
+		37DD7395276F42C10047FF31 /* GPBMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBMessage.h; sourceTree = "<group>"; };
+		37DD7396276F42C10047FF31 /* GPBProtocolBuffers_RuntimeSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBProtocolBuffers_RuntimeSupport.h; sourceTree = "<group>"; };
+		37DD7397276F42C10047FF31 /* GPBApi.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBApi.pbobjc.h; sourceTree = "<group>"; };
+		37DD7398276F42C10047FF31 /* GPBCodedInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBCodedInputStream.h; sourceTree = "<group>"; };
+		37DD7399276F42C10047FF31 /* GPBDescriptor_PackagePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBDescriptor_PackagePrivate.h; sourceTree = "<group>"; };
+		37DD739A276F42C10047FF31 /* GPBTimestamp.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBTimestamp.pbobjc.h; sourceTree = "<group>"; };
+		37DD739B276F42C10047FF31 /* GPBStruct.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBStruct.pbobjc.h; sourceTree = "<group>"; };
+		37DD739C276F42C10047FF31 /* GPBUnknownFieldSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBUnknownFieldSet.h; sourceTree = "<group>"; };
+		37DD739D276F42C10047FF31 /* GPBExtensionInternals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBExtensionInternals.h; sourceTree = "<group>"; };
+		37DD739E276F42C10047FF31 /* GPBSourceContext.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBSourceContext.pbobjc.h; sourceTree = "<group>"; };
+		37DD739F276F42C10047FF31 /* GPBUnknownField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBUnknownField.h; sourceTree = "<group>"; };
+		37DD73A0276F42C10047FF31 /* GPBUnknownFieldSet_PackagePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBUnknownFieldSet_PackagePrivate.h; sourceTree = "<group>"; };
+		37DD73A1276F42C10047FF31 /* GPBWellKnownTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBWellKnownTypes.h; sourceTree = "<group>"; };
+		37DD73A2276F42C10047FF31 /* GPBUnknownField_PackagePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBUnknownField_PackagePrivate.h; sourceTree = "<group>"; };
+		37DD73A3276F42C10047FF31 /* GPBDictionary_PackagePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBDictionary_PackagePrivate.h; sourceTree = "<group>"; };
+		37DD73A4277098EE0047FF31 /* libProtocolBuffers.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libProtocolBuffers.a; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +229,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37DD73A5277098EE0047FF31 /* libProtocolBuffers.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +261,8 @@
 		3784582E274BA52E00BE4635 /* Pro7 Media Sweeper */ = {
 			isa = PBXGroup;
 			children = (
+				37DD737D276F42C10047FF31 /* GPB-ObjectiveC */,
+				37DD72EC276F42B80047FF31 /* Pro7ProtoAPI */,
 				3784582F274BA52E00BE4635 /* AppDelegate.h */,
 				37845830274BA52E00BE4635 /* AppDelegate.m */,
 				37845832274BA52E00BE4635 /* ViewController.h */,
@@ -87,9 +274,158 @@
 				3784583A274BA52E00BE4635 /* main.m */,
 				3784583C274BA52E00BE4635 /* Pro7_Media_Sweeper.entitlements */,
 				373A0ECE2754AC040016D402 /* Credits.rtf */,
+				37DD73A4277098EE0047FF31 /* libProtocolBuffers.a */,
 			);
 			path = "Pro7 Media Sweeper";
 			sourceTree = "<group>";
+		};
+		37DD72EC276F42B80047FF31 /* Pro7ProtoAPI */ = {
+			isa = PBXGroup;
+			children = (
+				37DD72ED276F42B80047FF31 /* Timers.pbobjc.m */,
+				37DD72EE276F42B80047FF31 /* Propresenter.pbobjc.m */,
+				37DD72EF276F42B80047FF31 /* Timestamp.pbobjc.m */,
+				37DD72F0276F42B80047FF31 /* AlignmentGuide.pbobjc.h */,
+				37DD72F1276F42B80047FF31 /* ProMask.pbobjc.h */,
+				37DD72F2276F42B80047FF31 /* Layers.pbobjc.m */,
+				37DD72F3276F42B80047FF31 /* Proscreen.pbobjc.h */,
+				37DD72F4276F42B80047FF31 /* Presentation.pbobjc.m */,
+				37DD72F5276F42B80047FF31 /* ProCore.pbobjc.m */,
+				37DD72F6276F42B80047FF31 /* ClearGroups.pbobjc.m */,
+				37DD72F7276F42B80047FF31 /* TestPattern.pbobjc.h */,
+				37DD72F8276F42B80047FF31 /* Macros.pbobjc.h */,
+				37DD72F9276F42B80047FF31 /* Template.pbobjc.m */,
+				37DD72FA276F42B80047FF31 /* Screens.pbobjc.h */,
+				37DD72FB276F42B80047FF31 /* Playlist.pbobjc.m */,
+				37DD72FC276F42B80047FF31 /* Targets.pbobjc.m */,
+				37DD72FD276F42B80047FF31 /* Labels.pbobjc.h */,
+				37DD72FE276F42B80047FF31 /* Groups.pbobjc.h */,
+				37DD72FF276F42B80047FF31 /* Messages.pbobjc.h */,
+				37DD7300276F42B80047FF31 /* ProAudienceLook.pbobjc.h */,
+				37DD7301276F42B80047FF31 /* Workspace.pbobjc.m */,
+				37DD7302276F42B80047FF31 /* DigitalAudio.pbobjc.h */,
+				37DD7303276F42B80047FF31 /* PresentationSlide.pbobjc.h */,
+				37DD7304276F42B80047FF31 /* PropDocument.pbobjc.h */,
+				37DD7305276F42B80047FF31 /* Slide.pbobjc.h */,
+				37DD7306276F42B80047FF31 /* BasicTypes.pbobjc.h */,
+				37DD7307276F42B80047FF31 /* Effects.pbobjc.h */,
+				37DD7308276F42B80047FF31 /* Proworkspace.pbobjc.m */,
+				37DD7309276F42B80047FF31 /* Recording.pbobjc.m */,
+				37DD730A276F42B80047FF31 /* Cue.pbobjc.m */,
+				37DD730B276F42B80047FF31 /* Input.pbobjc.h */,
+				37DD730C276F42B80047FF31 /* HotKey.pbobjc.m */,
+				37DD730D276F42B80047FF31 /* Stage.pbobjc.h */,
+				37DD730E276F42B80047FF31 /* GraphicsData.pbobjc.h */,
+				37DD730F276F42B80047FF31 /* Calendar.pbobjc.m */,
+				37DD7310276F42B80047FF31 /* DmxProfiles.pbobjc.m */,
+				37DD7311276F42B80047FF31 /* Keymapping.pbobjc.h */,
+				37DD7312276F42B80047FF31 /* Background.pbobjc.h */,
+				37DD7313276F42B80047FF31 /* Ccli.pbobjc.h */,
+				37DD7314276F42B80047FF31 /* PlanningCenter.pbobjc.m */,
+				37DD7315276F42B80047FF31 /* Library.pbobjc.m */,
+				37DD7316276F42B80047FF31 /* BaseDocument.pbobjc.m */,
+				37DD7317276F42B80047FF31 /* PropSlide.pbobjc.m */,
+				37DD7318276F42B80047FF31 /* LiveVideoPlaylist.pbobjc.m */,
+				37DD7319276F42B80047FF31 /* Action.pbobjc.h */,
+				37DD731A276F42B80047FF31 /* ProApi.pbobjc.h */,
+				37DD731B276F42B80047FF31 /* Masks.pbobjc.h */,
+				37DD731C276F42B80047FF31 /* Audio.pbobjc.h */,
+				37DD731D276F42B80047FF31 /* ProCore.pbobjc.h */,
+				37DD731E276F42B80047FF31 /* Layers.pbobjc.h */,
+				37DD731F276F42B80047FF31 /* Presentation.pbobjc.h */,
+				37DD7320276F42B80047FF31 /* Proscreen.pbobjc.m */,
+				37DD7321276F42B80047FF31 /* AlignmentGuide.pbobjc.m */,
+				37DD7322276F42B80047FF31 /* ProMask.pbobjc.m */,
+				37DD7323276F42B80047FF31 /* Timestamp.pbobjc.h */,
+				37DD7324276F42B80047FF31 /* Propresenter.pbobjc.h */,
+				37DD7325276F42B80047FF31 /* Timers.pbobjc.h */,
+				37DD7326276F42B80047FF31 /* Workspace.pbobjc.h */,
+				37DD7327276F42B80047FF31 /* DigitalAudio.pbobjc.m */,
+				37DD7328276F42B80047FF31 /* ProAudienceLook.pbobjc.m */,
+				37DD7329276F42B80047FF31 /* Messages.pbobjc.m */,
+				37DD732A276F42B80047FF31 /* Groups.pbobjc.m */,
+				37DD732B276F42B80047FF31 /* Labels.pbobjc.m */,
+				37DD732C276F42B80047FF31 /* Targets.pbobjc.h */,
+				37DD732D276F42B80047FF31 /* Screens.pbobjc.m */,
+				37DD732E276F42B80047FF31 /* Playlist.pbobjc.h */,
+				37DD732F276F42B80047FF31 /* Template.pbobjc.h */,
+				37DD7330276F42B80047FF31 /* Macros.pbobjc.m */,
+				37DD7331276F42B80047FF31 /* TestPattern.pbobjc.m */,
+				37DD7332276F42B80047FF31 /* ClearGroups.pbobjc.h */,
+				37DD7333276F42B80047FF31 /* DmxProfiles.pbobjc.h */,
+				37DD7334276F42B80047FF31 /* Keymapping.pbobjc.m */,
+				37DD7335276F42B80047FF31 /* GraphicsData.pbobjc.m */,
+				37DD7336276F42B80047FF31 /* Calendar.pbobjc.h */,
+				37DD7337276F42B80047FF31 /* Stage.pbobjc.m */,
+				37DD7338276F42B80047FF31 /* HotKey.pbobjc.h */,
+				37DD7339276F42B80047FF31 /* Cue.pbobjc.h */,
+				37DD733A276F42B80047FF31 /* Input.pbobjc.m */,
+				37DD733B276F42B80047FF31 /* Recording.pbobjc.h */,
+				37DD733C276F42B80047FF31 /* Effects.pbobjc.m */,
+				37DD733D276F42B80047FF31 /* Proworkspace.pbobjc.h */,
+				37DD733E276F42B80047FF31 /* BasicTypes.pbobjc.m */,
+				37DD733F276F42B80047FF31 /* PresentationSlide.pbobjc.m */,
+				37DD7340276F42B80047FF31 /* PropDocument.pbobjc.m */,
+				37DD7341276F42B80047FF31 /* Slide.pbobjc.m */,
+				37DD7342276F42B80047FF31 /* Audio.pbobjc.m */,
+				37DD7343276F42B80047FF31 /* Action.pbobjc.m */,
+				37DD7344276F42B80047FF31 /* Masks.pbobjc.m */,
+				37DD7345276F42B80047FF31 /* ProApi.pbobjc.m */,
+				37DD7346276F42B80047FF31 /* LiveVideoPlaylist.pbobjc.h */,
+				37DD7347276F42B80047FF31 /* PropSlide.pbobjc.h */,
+				37DD7348276F42B80047FF31 /* PlanningCenter.pbobjc.h */,
+				37DD7349276F42B80047FF31 /* Library.pbobjc.h */,
+				37DD734A276F42B80047FF31 /* BaseDocument.pbobjc.h */,
+				37DD734B276F42B80047FF31 /* Ccli.pbobjc.m */,
+				37DD734C276F42B80047FF31 /* Background.pbobjc.m */,
+			);
+			path = Pro7ProtoAPI;
+			sourceTree = SOURCE_ROOT;
+		};
+		37DD737D276F42C10047FF31 /* GPB-ObjectiveC */ = {
+			isa = PBXGroup;
+			children = (
+				37DD737E276F42C10047FF31 /* GPBCodedOutputStream_PackagePrivate.h */,
+				37DD737F276F42C10047FF31 /* GPBArray.h */,
+				37DD7380276F42C10047FF31 /* GPBAny.pbobjc.h */,
+				37DD7381276F42C10047FF31 /* GPBProtocolBuffers.h */,
+				37DD7382276F42C10047FF31 /* GPBFieldMask.pbobjc.h */,
+				37DD7383276F42C10047FF31 /* GPBDuration.pbobjc.h */,
+				37DD7384276F42C10047FF31 /* GPBDictionary.h */,
+				37DD7385276F42C10047FF31 /* GPBCodedOutputStream.h */,
+				37DD7386276F42C10047FF31 /* GPBRootObject_PackagePrivate.h */,
+				37DD7387276F42C10047FF31 /* GPBUtilities_PackagePrivate.h */,
+				37DD7388276F42C10047FF31 /* GPBWrappers.pbobjc.h */,
+				37DD7389276F42C10047FF31 /* GPBDescriptor.h */,
+				37DD738A276F42C10047FF31 /* GPBCodedInputStream_PackagePrivate.h */,
+				37DD738B276F42C10047FF31 /* GPBRootObject.h */,
+				37DD738C276F42C10047FF31 /* GPBBootstrap.h */,
+				37DD738D276F42C10047FF31 /* GPBExtensionRegistry.h */,
+				37DD738E276F42C10047FF31 /* GPBType.pbobjc.h */,
+				37DD738F276F42C10047FF31 /* GPBRuntimeTypes.h */,
+				37DD7390276F42C10047FF31 /* GPBUtilities.h */,
+				37DD7391276F42C10047FF31 /* GPBMessage_PackagePrivate.h */,
+				37DD7392276F42C10047FF31 /* GPBWireFormat.h */,
+				37DD7393276F42C10047FF31 /* GPBArray_PackagePrivate.h */,
+				37DD7394276F42C10047FF31 /* GPBEmpty.pbobjc.h */,
+				37DD7395276F42C10047FF31 /* GPBMessage.h */,
+				37DD7396276F42C10047FF31 /* GPBProtocolBuffers_RuntimeSupport.h */,
+				37DD7397276F42C10047FF31 /* GPBApi.pbobjc.h */,
+				37DD7398276F42C10047FF31 /* GPBCodedInputStream.h */,
+				37DD7399276F42C10047FF31 /* GPBDescriptor_PackagePrivate.h */,
+				37DD739A276F42C10047FF31 /* GPBTimestamp.pbobjc.h */,
+				37DD739B276F42C10047FF31 /* GPBStruct.pbobjc.h */,
+				37DD739C276F42C10047FF31 /* GPBUnknownFieldSet.h */,
+				37DD739D276F42C10047FF31 /* GPBExtensionInternals.h */,
+				37DD739E276F42C10047FF31 /* GPBSourceContext.pbobjc.h */,
+				37DD739F276F42C10047FF31 /* GPBUnknownField.h */,
+				37DD73A0276F42C10047FF31 /* GPBUnknownFieldSet_PackagePrivate.h */,
+				37DD73A1276F42C10047FF31 /* GPBWellKnownTypes.h */,
+				37DD73A2276F42C10047FF31 /* GPBUnknownField_PackagePrivate.h */,
+				37DD73A3276F42C10047FF31 /* GPBDictionary_PackagePrivate.h */,
+			);
+			path = "GPB-ObjectiveC";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -164,10 +500,58 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37DD7360276F42B90047FF31 /* BaseDocument.pbobjc.m in Sources */,
+				37DD7350276F42B90047FF31 /* Layers.pbobjc.m in Sources */,
+				37DD7368276F42B90047FF31 /* Messages.pbobjc.m in Sources */,
+				37DD7359276F42B90047FF31 /* Recording.pbobjc.m in Sources */,
+				37DD737C276F42B90047FF31 /* Background.pbobjc.m in Sources */,
+				37DD7374276F42B90047FF31 /* PresentationSlide.pbobjc.m in Sources */,
+				37DD735D276F42B90047FF31 /* DmxProfiles.pbobjc.m in Sources */,
+				37DD7366276F42B90047FF31 /* DigitalAudio.pbobjc.m in Sources */,
+				37DD7356276F42B90047FF31 /* Targets.pbobjc.m in Sources */,
+				37DD7352276F42B90047FF31 /* ProCore.pbobjc.m in Sources */,
+				37DD7377276F42B90047FF31 /* Audio.pbobjc.m in Sources */,
+				37DD735A276F42B90047FF31 /* Cue.pbobjc.m in Sources */,
+				37DD734F276F42B90047FF31 /* Timestamp.pbobjc.m in Sources */,
 				37845834274BA52E00BE4635 /* ViewController.m in Sources */,
+				37DD7353276F42B90047FF31 /* ClearGroups.pbobjc.m in Sources */,
+				37DD7369276F42B90047FF31 /* Groups.pbobjc.m in Sources */,
+				37DD736E276F42B90047FF31 /* Keymapping.pbobjc.m in Sources */,
+				37DD735C276F42B90047FF31 /* Calendar.pbobjc.m in Sources */,
+				37DD7365276F42B90047FF31 /* ProMask.pbobjc.m in Sources */,
+				37DD736B276F42B90047FF31 /* Screens.pbobjc.m in Sources */,
+				37DD735B276F42B90047FF31 /* HotKey.pbobjc.m in Sources */,
+				37DD735F276F42B90047FF31 /* Library.pbobjc.m in Sources */,
+				37DD7370276F42B90047FF31 /* Stage.pbobjc.m in Sources */,
 				37BC0F6527544A89003061D1 /* P7MSClickableTextField.m in Sources */,
+				37DD734D276F42B90047FF31 /* Timers.pbobjc.m in Sources */,
+				37DD7355276F42B90047FF31 /* Playlist.pbobjc.m in Sources */,
+				37DD7362276F42B90047FF31 /* LiveVideoPlaylist.pbobjc.m in Sources */,
+				37DD736A276F42B90047FF31 /* Labels.pbobjc.m in Sources */,
+				37DD7367276F42B90047FF31 /* ProAudienceLook.pbobjc.m in Sources */,
+				37DD734E276F42B90047FF31 /* Propresenter.pbobjc.m in Sources */,
 				3784583B274BA52E00BE4635 /* main.m in Sources */,
+				37DD7373276F42B90047FF31 /* BasicTypes.pbobjc.m in Sources */,
+				37DD7375276F42B90047FF31 /* PropDocument.pbobjc.m in Sources */,
+				37DD7351276F42B90047FF31 /* Presentation.pbobjc.m in Sources */,
+				37DD7354276F42B90047FF31 /* Template.pbobjc.m in Sources */,
+				37DD7379276F42B90047FF31 /* Masks.pbobjc.m in Sources */,
+				37DD7364276F42B90047FF31 /* AlignmentGuide.pbobjc.m in Sources */,
+				37DD736F276F42B90047FF31 /* GraphicsData.pbobjc.m in Sources */,
+				37DD737A276F42B90047FF31 /* ProApi.pbobjc.m in Sources */,
+				37DD735E276F42B90047FF31 /* PlanningCenter.pbobjc.m in Sources */,
+				37DD7363276F42B90047FF31 /* Proscreen.pbobjc.m in Sources */,
+				37DD7378276F42B90047FF31 /* Action.pbobjc.m in Sources */,
 				37845831274BA52E00BE4635 /* AppDelegate.m in Sources */,
+				37DD7358276F42B90047FF31 /* Proworkspace.pbobjc.m in Sources */,
+				37DD736C276F42B90047FF31 /* Macros.pbobjc.m in Sources */,
+				37DD7371276F42B90047FF31 /* Input.pbobjc.m in Sources */,
+				37DD736D276F42B90047FF31 /* TestPattern.pbobjc.m in Sources */,
+				37DD737B276F42B90047FF31 /* Ccli.pbobjc.m in Sources */,
+				37DD7361276F42B90047FF31 /* PropSlide.pbobjc.m in Sources */,
+				37DD7357276F42B90047FF31 /* Workspace.pbobjc.m in Sources */,
+				37DD7376276F42B90047FF31 /* Slide.pbobjc.m in Sources */,
+				37DD7372276F42B90047FF31 /* Effects.pbobjc.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +698,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MARKETING_VERSION = 0.91;
 				ONLY_ACTIVE_ARCH = NO;
@@ -340,6 +728,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MARKETING_VERSION = 0.91;
