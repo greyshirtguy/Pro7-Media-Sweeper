@@ -1,3 +1,7 @@
+
+### This Repo is Now Archived - As Arlins Media Sweeper (Link below) now has a MacOS version....
+
+ 
 # ![icon](Icon.png) Pro7 Media Sweeper
 ### A MacOS port of [Pro7-Media-Sweeper](https://github.com/arlinsandbulte/Pro7-Media-Sweeper) by Arlin Sandbulte.
 ![Screenshot](ScreenShot.png)
